@@ -1,0 +1,7 @@
+#!/bin/bash
+git clone https://github.com/jlcoulter/flake
+ln -s ~/flake/dots/* ~/.config/
+rm ~/flake/hosts/home/hardware-configuration.nix
+sudo nixos-generate-config
+sudo cp /etc/nixos/hardward-configuration.nix ~/flake/hosts/home/hardware-configuration.nix
+sudo nixos-rebuild switch --flake ~/flake#default
