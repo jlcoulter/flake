@@ -1,5 +1,4 @@
 #!/bin/bash
-git clone https://github.com/jlcoulter/flake
 ln -s ~/flake/dots/* ~/.config/
 rm ~/flake/hosts/home/hardware-configuration.nix
 sudo nixos-generate-config
