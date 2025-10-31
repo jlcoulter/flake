@@ -8,6 +8,8 @@
 
   services.displayManager.ly.enable = true;
 
+  programs.xwayland.enable = true;
+
   environment.systemPackages = with pkgs; [
     wofi
     hyprpaper
