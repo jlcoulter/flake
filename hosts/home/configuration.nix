@@ -49,7 +49,7 @@
       zsh
       neofetch
       prusa-slicer
-      freecad
+      # freecad #build error
       spotify
       vscode
       neovim
