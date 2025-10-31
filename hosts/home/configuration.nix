@@ -16,15 +16,22 @@
   ];
 
   programs.zsh.enable = true;
+
   programs = {
+    gamemode.enable = true;
     gamescope = {
       enable = true;
       capSysNice = true;
     };
     steam = {
       enable = true;
-      gamescopeSession.enable = true;
+      gamescopeSession.enable = false;
+      extraPackages = with pkgs; [mangohud gamemode];
     };
+  };
+
+  environment.sessionVariables = {
+    STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/jc/.steam/root/compatibilitytools.d";
   };
 
   programs.nix-ld.enable = true;
