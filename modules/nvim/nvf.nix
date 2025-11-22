@@ -25,8 +25,11 @@
         autocomplete.nvim-cmp.enable = true;
         globals.mapleader = ",";
 
+
+        lsp.enable = true;
+
+
         languages = {
-          enableLSP = true;
           enableTreesitter = true;
           enableFormat = true;
           nix = {

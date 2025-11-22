@@ -88,6 +88,7 @@
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.jc = {
+    shell = pkgs.zsh;
     isNormalUser = true;
     description = "Jack Coulter";
     extraGroups = [ "networkmanager" "wheel" ];
@@ -100,6 +101,7 @@
       thunderbird
       lmstudio
       prismlauncher
+      nixd
     ];
   };
 
@@ -111,6 +113,9 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+
+  # Install zsh
+  programs.zsh.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

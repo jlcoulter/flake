@@ -16,7 +16,7 @@
     };
   };
 
-  services.displayManager.ly.enable = true;
+#  services.displayManager.ly.enable = true;
 
   environment.systemPackages = with pkgs; [
     wofi
