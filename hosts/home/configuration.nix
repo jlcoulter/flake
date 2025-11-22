@@ -2,13 +2,20 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../system/system.nix
+    ../../modules/pcloud/pcloud.nix
+    ../../modules/bluetooth/bluetooth.nix
+    #  ../../modules/leftwm/leftwm.nix
+    ../../modules/hyprland/hyprland.nix
+    ../../modules/virt/virt.nix
+    ../../modules/printer/printer.nix
+    ../../modules/nvim/nvf.nix
     ];
 
   # Bootloader.
@@ -111,6 +118,15 @@
     mesa
     vulkan-tools
   ];
+
+
+    home-manager = {
+    extraSpecialArgs = {inherit inputs;};
+    backupFileExtension = "backup";
+    users = {
+      "jc" = import ./home.nix;
+    };
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

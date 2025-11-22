@@ -1,0 +1,39 @@
+[window]
+opacity = 1
+blur = true
+
+[font]
+size = 14
+
+[font.normal]
+family = "JetBrains Mono"
+style = "Regular"
+
+
+[font.bold]
+family = "JetBrains Mono"
+style = "Regular"
+
+[colors.dim]
+black = "#373e4d"
+blue = "#68809a"
+cyan = "#6d96a5"
+green = "#809575"
+magenta = "#8c738c"
+red = "#94545d"
+white = "#aeb3bb"
+yellow = "#b29e75"
+
+[colors.normal]
+black = "#3b4252"
+blue = "#81a1c1"
+cyan = "#88c0d0"
+green = "#a3be8c"
+magenta = "#b48ead"
+red = "#bf616a"
+white = "#e5e9f0"
+yellow = "#ebcb8b"
+
+[colors.primary]
+background = "#24283b"
+foreground = "#c0caf5"
