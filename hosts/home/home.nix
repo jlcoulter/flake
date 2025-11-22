@@ -19,12 +19,14 @@ in {
 
   programs.git = {
     enable = true;
-    userName = "jlcoulter";
-    userEmail = "coulter.l.jack@gmail.com";
-    aliases = {
-      pu = "push";
-      co = "checkout";
-      cm = "commit";
+    settings = {
+      user.name = "jlcoulter";
+      user.email = "coulter.l.jack@gmail.com";
+      aliases = {
+        pu = "push";
+        co = "checkout";
+        cm = "commit";
+      };
     };
   };
 
