@@ -1,12 +1,13 @@
 {
-  config,
   pkgs,
   ...
-}: {
-  programs.hyprland.enable = true;
-  programs.sway.enable = true;
-  programs.waybar.enable = true;
-
+}:
+{
+  programs = {
+    hyprland.enable = true;
+    sway.enable = true;
+    waybar.enable = true;
+  };
   programs.uwsm.enable = true;
   programs.uwsm.waylandCompositors = {
     hyprland = {
@@ -16,7 +17,7 @@
     };
   };
 
-#  services.displayManager.ly.enable = true;
+  #  services.displayManager.ly.enable = true;
 
   environment.systemPackages = with pkgs; [
     wofi
@@ -27,8 +28,8 @@
     wireplumber
     hyprpolkitagent
     hyprsunset
-    hypridle
-    hyprlock
+    # hypridle
+    # hyprlock
     nwg-look
     pywal
   ];

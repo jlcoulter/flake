@@ -1,11 +1,7 @@
-{
-  config,
-  pkgs,
-  ...
-}: let
+let
   locale = "en_AU.UTF-8";
-in {
-  # Boot
+in
+{
   boot = {
     loader = {
       systemd-boot.enable = true;
@@ -13,7 +9,6 @@ in {
     };
   };
 
-  # Locale
   time.timeZone = "Australia/Sydney";
   i18n = {
     defaultLocale = "en_GB.UTF-8";
@@ -29,19 +24,6 @@ in {
       LC_TIME = locale;
     };
   };
-
-  services.xserver.xkb.layout = "us";
-
-  # Nix upgrade
-  nixpkgs.config.allowBroken = true;
-  system = {
-    autoUpgrade = {
-      enable = true;
-      dates = "weekly";
-    };
-  };
-
-  # Version clean-up
   nix = {
     gc = {
       automatic = true;
@@ -50,32 +32,44 @@ in {
     };
     settings = {
       auto-optimise-store = true;
-      experimental-features = ["nix-command" "flakes"];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
     };
   };
-
-  # Networking
-  services.tailscale.enable = true;
+  nixpkgs.config.allowBroken = true;
+  system = {
+    autoUpgrade = {
+      enable = true;
+      dates = "weekly";
+    };
+  };
   networking = {
     hostName = "jcpc";
     networkmanager.enable = true;
     firewall = {
       enable = true;
-      allowedTCPPorts = [25565 5678];
-      allowedUDPPortRanges = [];
+      allowedTCPPorts = [
+        25565
+        5678
+      ];
+      allowedUDPPortRanges = [ ];
     };
   };
 
-  # Audio
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-    alsa = {
+  services = {
+    xserver.xkb.layout = "us";
+    tailscale.enable = true;
+    pipewire = {
       enable = true;
-      support32Bit = true;
+      pulse.enable = true;
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
     };
   };
 
-  }
-
+}

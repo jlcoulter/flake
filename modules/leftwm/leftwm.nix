@@ -1,16 +1,17 @@
 {
-  config,
   pkgs,
   ...
-}: {
-  services.xserver = {
-    enable = true;
-    windowManager.leftwm.enable = true;
+}:
+{
+  services = {
+    xserver = {
+      enable = true;
+      windowManager.leftwm.enable = true;
+    };
+
+    displayManager.ly.enable = true;
+    picom.enable = true;
   };
-
-  services.displayManager.ly.enable = true;
-  services.picom.enable = true;
-
   environment.systemPackages = with pkgs; [
     rofi
     dunst
