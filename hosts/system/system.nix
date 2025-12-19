@@ -1,3 +1,5 @@
+{ pkgs, lib, ... }:
+
 let
   locale = "en_AU.UTF-8";
 in
@@ -57,6 +59,16 @@ in
       allowedUDPPortRanges = [ ];
     };
   };
+
+  services.udev.packages = lib.singleton (
+    pkgs.writeTextFile {
+      name = "keychron-no-joystick";
+      text = ''
+        KERNEL=="event*", SUBSYSTEM=="input", ENV{ID_VENDOR_ID}=="3434", ENV{ID_INPUT_JOYSTICK}=="*?", ENV{ID_INPUT_JOYSTICK}=""
+      '';
+      destination = "/etc/udev/rules.d/69-keychron-no-joystick.rules";
+    }
+  );
 
   security.rtkit.enable = true;
   services = {

@@ -5,6 +5,12 @@
     nixd
     statix
     deadnix
+    gopls
+    libcap
+    go
+    gcc
+    exercism
+    delve
   ];
   programs.nvf = {
     enable = true;
@@ -24,11 +30,14 @@
         assistant = {
           chatgpt.mappings.grammarCorrection.enable = true;
           copilot = {
-            enable = true;
+            enable = false;
             cmp = {
               enable = true;
             };
           };
+        };
+        debugger = {
+          nvim-dap.enable = true;
         };
         diagnostics = {
           enable = true;
@@ -54,6 +63,39 @@
               "statix"
               "deadnix"
             ];
+            treesitter = {
+              enable = true;
+            };
+          };
+          yaml = {
+            enable = true;
+            lsp.enable = true;
+            treesitter.enable = true;
+          };
+          css = {
+            enable = true;
+            lsp.enable = true;
+            treesitter.enable = true;
+          };
+          html = {
+            enable = true;
+            lsp.enable = true;
+            treesitter.enable = true;
+
+          };
+          go = {
+            enable = true;
+            dap.enable = true;
+            format.enable = true;
+            lsp.enable = true;
+            treesitter.enable = true;
+          };
+          markdown = {
+            enable = true;
+            format.enable = true;
+            lsp.enable = true;
+            treesitter.enable = true;
+            extensions.markview-nvim.enable = true;
           };
         };
       };

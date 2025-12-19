@@ -6,7 +6,6 @@
     ../system/system.nix
     ../../modules/pcloud/pcloud.nix
     ../../modules/bluetooth/bluetooth.nix
-    ../../modules/hyprland/hyprland.nix
     ../../modules/virt/virt.nix
     ../../modules/printer/printer.nix
     ../../modules/nvim/nvf.nix
@@ -77,7 +76,6 @@
       alacritty
       thunderbird
       prismlauncher
-      nixd
       element-desktop
       easyeffects
       marktext
@@ -85,6 +83,11 @@
       nmap
       brave
       nextcloud-client
+      gimp
+      spotify
+      mgba
+      kdePackages.calligra
+      libreoffice
     ];
   };
 
