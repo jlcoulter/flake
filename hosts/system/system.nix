@@ -11,6 +11,10 @@ in
     };
   };
 
+  fileSystems."/home/jc/nasBK" = {
+    device = "dev/disk/by-uuid/887f72ac-bcb0-4b21-a3b5-b6bed37b90c9";
+  };
+
   time.timeZone = "Australia/Sydney";
   i18n = {
     defaultLocale = "en_GB.UTF-8";
@@ -55,10 +59,24 @@ in
       allowedTCPPorts = [
         25565
         5678
+        21
+      ];
+      allowedTCPPortRanges = [
+        # #ftp
+        {
+          from = 51000;
+          to = 51999;
+        }
+
       ];
       allowedUDPPortRanges = [ ];
     };
   };
+  services.vsftpd.extraConfig = ''
+    pasv_enable=Yes
+    pasv_min_port=51000
+    pasv_max_port=51999
+  '';
 
   services.udev.packages = lib.singleton (
     pkgs.writeTextFile {
