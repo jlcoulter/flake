@@ -11,6 +11,8 @@
     gcc
     exercism
     delve
+    terraform
+    terraform-ls
   ];
   programs.nvf = {
     enable = true;
@@ -63,24 +65,18 @@
               "statix"
               "deadnix"
             ];
-            treesitter = {
-              enable = true;
-            };
           };
           yaml = {
             enable = true;
             lsp.enable = true;
-            treesitter.enable = true;
           };
           css = {
             enable = true;
             lsp.enable = true;
-            treesitter.enable = true;
           };
           html = {
             enable = true;
             lsp.enable = true;
-            treesitter.enable = true;
 
           };
           go = {
@@ -88,13 +84,15 @@
             dap.enable = true;
             format.enable = true;
             lsp.enable = true;
-            treesitter.enable = true;
+          };
+          terraform = {
+            enable = true;
+            lsp.enable = true;
           };
           markdown = {
             enable = true;
             format.enable = true;
             lsp.enable = true;
-            treesitter.enable = true;
             extensions.markview-nvim.enable = true;
           };
         };

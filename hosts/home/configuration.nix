@@ -4,17 +4,20 @@
   imports = [
     ./hardware-configuration.nix
     ../system/system.nix
+    ../system/nfs.nix
     ../../modules/pcloud/pcloud.nix
     ../../modules/bluetooth/bluetooth.nix
     ../../modules/virt/virt.nix
     ../../modules/printer/printer.nix
     ../../modules/nvim/nvf.nix
+
   ];
 
   nixpkgs.config.allowUnfree = true;
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelModules = [ "sg" ];
 
   networking.hostName = "jcpc";
 
@@ -86,10 +89,17 @@
       gimp
       spotify
       mgba
-      kdePackages.calligra
       libreoffice
+      rpi-imager
+      bitwarden-desktop
+      nfs-utils
+      vlc
+      ffmpeg
+      rclone
     ];
   };
+
+  services.flatpak.enable = true;
 
   programs = {
     firefox.enable = true;
