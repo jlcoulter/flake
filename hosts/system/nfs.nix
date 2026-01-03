@@ -50,4 +50,25 @@
       (commonAutoMountOptions // { where = "/home/jc/jellyfin"; })
       (commonAutoMountOptions // { where = "/home/jc/nas"; })
     ];
+
+  systemd.timers."rsync-nas" = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnBootSec = "5m";
+      OnUnitActiveSec = "30m";
+      Unit = "rsync-nas.service";
+    };
+  };
+
+  systemd.services."rsync-nas" = {
+    script = ''
+      sudo rsync -a /home/jc/jellyfin /home/jc/nasBK
+      sudo rsync -a /home/jc/nas /home/jc/nasBK
+    '';
+    serviceConfig = {
+      Type = "oneshot";
+      User = "root";
+    };
+  };
+
 }

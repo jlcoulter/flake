@@ -3,6 +3,8 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-python.url = "github:cachix/nixpkgs-python";
     nvf.url = "github:notashelf/nvf/v0.8";
+    ansible-vim.url = "github:pearofducks/ansible-vim";
+    ansible-vim.flake = false;
 
     home-manager = {
       url = "github:nix-community/home-manager";

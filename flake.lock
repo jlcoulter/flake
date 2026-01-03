@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "ansible-vim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1758983868,
+        "narHash": "sha256-+z1gTLNn8y6rFKUCPxh8biDc2p3VzIvsAEjTKlkmm4U=",
+        "owner": "pearofducks",
+        "repo": "ansible-vim",
+        "rev": "6718ff81fe36f5f4fbf6675d95b16e4a74814827",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pearofducks",
+        "repo": "ansible-vim",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -180,6 +196,7 @@
     },
     "root": {
       "inputs": {
+        "ansible-vim": "ansible-vim",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
         "nixpkgs-python": "nixpkgs-python",

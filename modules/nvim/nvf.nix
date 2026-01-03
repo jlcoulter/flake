@@ -1,5 +1,4 @@
 { pkgs, ... }:
-
 {
   environment.systemPackages = with pkgs; [
     nixd
@@ -13,11 +12,18 @@
     delve
     terraform
     terraform-ls
+    ansible
+    ansible-lint
   ];
   programs.nvf = {
     enable = true;
     settings = {
       vim = {
+        startPlugins = [
+          pkgs.vimPlugins.lazy-nvim
+          pkgs.vimPlugins.ansible-vim
+        ];
+
         autopairs.nvim-autopairs.enable = true;
         options.shiftwidth = 2;
         statusline.lualine.enable = true;

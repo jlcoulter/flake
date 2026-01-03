@@ -96,6 +96,9 @@
       vlc
       ffmpeg
       rclone
+      rsync
+      sshfs
+      talosctl
     ];
   };
 
