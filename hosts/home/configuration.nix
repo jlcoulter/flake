@@ -5,12 +5,10 @@
     ./hardware-configuration.nix
     ../system/system.nix
     ../system/nfs.nix
-    ../../modules/pcloud/pcloud.nix
     ../../modules/bluetooth/bluetooth.nix
     ../../modules/virt/virt.nix
     ../../modules/printer/printer.nix
     ../../modules/nvim/nvf.nix
-
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -40,9 +38,11 @@
   };
 
   services = {
+    rsync.enable = true;
     xserver.enable = true;
     displayManager.sddm.enable = true;
     desktopManager.plasma6.enable = true;
+    xserver.desktopManager.mate.enable = true;
     xserver.xkb = {
       layout = "us";
       variant = "";
@@ -91,14 +91,13 @@
       mgba
       libreoffice
       rpi-imager
-      bitwarden-desktop
       nfs-utils
       vlc
       ffmpeg
-      rclone
-      rsync
       sshfs
-      talosctl
+      runelite
+      direnv
+      nix-direnv
     ];
   };
 

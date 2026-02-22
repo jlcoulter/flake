@@ -14,6 +14,7 @@
     terraform-ls
     ansible
     ansible-lint
+    stylua
   ];
   programs.nvf = {
     enable = true;
@@ -23,7 +24,6 @@
           pkgs.vimPlugins.lazy-nvim
           pkgs.vimPlugins.ansible-vim
         ];
-
         autopairs.nvim-autopairs.enable = true;
         options.shiftwidth = 2;
         statusline.lualine.enable = true;
@@ -75,6 +75,11 @@
           yaml = {
             enable = true;
             lsp.enable = true;
+          };
+          lua = {
+            enable = true;
+            lsp.enable = true;
+            format.type = [ "stylua" ];
           };
           css = {
             enable = true;

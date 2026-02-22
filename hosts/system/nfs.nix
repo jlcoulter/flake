@@ -11,7 +11,7 @@
         };
       };
 
-      server = "192.168.0.160";
+      server = "10.1.1.150";
       jellyfin = "/volume1/jellyfin";
       nas = "/volume1/nas";
 
@@ -51,24 +51,10 @@
       (commonAutoMountOptions // { where = "/home/jc/nas"; })
     ];
 
-  systemd.timers."rsync-nas" = {
-    wantedBy = [ "timers.target" ];
-    timerConfig = {
-      OnBootSec = "5m";
-      OnUnitActiveSec = "30m";
-      Unit = "rsync-nas.service";
-    };
-  };
-
-  systemd.services."rsync-nas" = {
-    script = ''
-      sudo rsync -a /home/jc/jellyfin /home/jc/nasBK
-      sudo rsync -a /home/jc/nas /home/jc/nasBK
-    '';
-    serviceConfig = {
-      Type = "oneshot";
-      User = "root";
-    };
-  };
-
+  services.rsync.jobs.backupNAS.destination = "/home/jc/nasBK";
+  services.rsync.jobs.backupNAS.sources = [
+    "/home/jc/jellyfin"
+    "/home/jc/nas"
+  ];
+  services.rsync.jobs.backupNAS.timerConfig.OnCalendar = "hourly";
 }
