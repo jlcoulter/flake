@@ -78,14 +78,11 @@
       zsh
       alacritty
       thunderbird
-      prismlauncher
       element-desktop
       easyeffects
       marktext
       vscode
       nmap
-      brave
-      nextcloud-client
       gimp
       spotify
       mgba
@@ -95,7 +92,6 @@
       vlc
       ffmpeg
       sshfs
-      runelite
       direnv
       nix-direnv
     ];
