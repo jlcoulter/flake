@@ -15,26 +15,55 @@
     ansible
     ansible-lint
     stylua
+    black
+    pyright
+    xclip
   ];
+
   programs.nvf = {
     enable = true;
     settings = {
       vim = {
-        startPlugins = [
-          pkgs.vimPlugins.lazy-nvim
-          pkgs.vimPlugins.ansible-vim
+        clipboard.enable = true;
+        startPlugins = with pkgs; [
+          vimPlugins.nvim-web-devicons
+          vimPlugins.nvim-neoclip-lua
+          vimPlugins.blink-indent
         ];
+        utility = {
+          leetcode-nvim.enable = true;
+          oil-nvim.enable = true;
+
+        };
         autopairs.nvim-autopairs.enable = true;
-        options.shiftwidth = 2;
+        options.shiftwidth = 4;
         statusline.lualine.enable = true;
         telescope.enable = true;
         globals.mapleader = ",";
-        autocomplete.nvim-cmp.enable = true;
+        treesitter.enable = true;
+
+        autocomplete = {
+          blink-cmp.enable = true;
+        };
+
         theme = {
           enable = true;
           name = "tokyonight";
           style = "moon";
         };
+
+        git = {
+          enable = true;
+          gitsigns.enable = true;
+          gitsigns.codeActions.enable = false;
+        };
+
+        formatter = {
+          conform-nvim.enable = true;
+        };
+
+        fzf-lua.enable = true;
+
         assistant = {
           chatgpt.mappings.grammarCorrection.enable = true;
           copilot = {
@@ -51,13 +80,15 @@
           enable = true;
           nvim-lint.enable = true;
           nvim-lint.lint_after_save = true;
-          config.virtual_lines = true;
+          config.signs = true;
+          config.virtual_text = true;
         };
         lsp = {
           enable = true;
           formatOnSave = true;
           inlayHints.enable = true;
           lightbulb.enable = true;
+          trouble.enable = true;
         };
         languages = {
           nix = {
@@ -71,6 +102,13 @@
               "statix"
               "deadnix"
             ];
+          };
+          python = {
+            enable = true;
+            lsp.enable = true;
+            dap.enable = true;
+            format.enable = true;
+            treesitter.enable = true;
           };
           yaml = {
             enable = true;
@@ -88,13 +126,14 @@
           html = {
             enable = true;
             lsp.enable = true;
-
           };
           go = {
             enable = true;
             dap.enable = true;
             format.enable = true;
+            format.type = [ "golines" ];
             lsp.enable = true;
+            treesitter.enable = true;
           };
           terraform = {
             enable = true;

@@ -9,14 +9,15 @@
     ../../modules/virt/virt.nix
     ../../modules/printer/printer.nix
     ../../modules/nvim/nvf.nix
+    #../../modules/nvim/nixvim.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
-
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelModules = [ "sg" ];
-
+  boot = {
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
+    kernelModules = [ "sg" ];
+  };
   networking.hostName = "jcpc";
 
   networking.networkmanager.enable = true;
@@ -39,13 +40,12 @@
 
   services = {
     rsync.enable = true;
-    xserver.enable = true;
     displayManager.sddm.enable = true;
     desktopManager.plasma6.enable = true;
-    xserver.desktopManager.mate.enable = true;
-    xserver.xkb = {
-      layout = "us";
-      variant = "";
+    xserver = {
+      enable = true;
+      windowManager.qtile.enable = true;
+      xkb.layout = "us";
     };
     printing.enable = true;
     pulseaudio.enable = false;
@@ -73,9 +73,9 @@
     ];
     packages = with pkgs; [
       kdePackages.kate
+      postgresql
       neovim
       git
-      zsh
       alacritty
       thunderbird
       element-desktop
@@ -94,6 +94,11 @@
       sshfs
       direnv
       nix-direnv
+      unzip
+      ollama
+      ripgrep
+      fd
+      dbeaver-bin
     ];
   };
 
