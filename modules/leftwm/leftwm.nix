@@ -12,6 +12,9 @@
     displayManager.ly.enable = true;
     picom.enable = true;
   };
+  services.xserver.deviceSection = ''
+    Option "TearFree" "true"
+  '';
   environment.systemPackages = with pkgs; [
     rofi
     dunst

@@ -9,6 +9,7 @@
     ../../modules/virt/virt.nix
     ../../modules/printer/printer.nix
     ../../modules/nvim/nvf.nix
+    ../../modules/leftwm/leftwm.nix
     #../../modules/nvim/nixvim.nix
   ];
 
@@ -40,13 +41,11 @@
 
   services = {
     rsync.enable = true;
-    displayManager.sddm.enable = true;
-    desktopManager.plasma6.enable = true;
     xserver = {
       enable = true;
-      windowManager.qtile.enable = true;
       xkb.layout = "us";
     };
+
     printing.enable = true;
     pulseaudio.enable = false;
     pipewire = {
@@ -99,10 +98,21 @@
       ripgrep
       fd
       dbeaver-bin
+      postgresql
     ];
   };
 
-  services.flatpak.enable = true;
+  services.postgresql = {
+    enable = true;
+    ensureDatabases = [
+      "openLibrary"
+      "userData"
+    ];
+    authentication = pkgs.lib.mkOverride 10 ''
+      #type database  DBuser  auth-method
+      local all       all     trust
+    '';
+  };
 
   programs = {
     firefox.enable = true;

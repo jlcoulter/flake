@@ -2,6 +2,7 @@
 {
   environment.systemPackages = with pkgs; [
     nixd
+    sqlc
     statix
     deadnix
     gopls
@@ -18,12 +19,24 @@
     black
     pyright
     xclip
+    sqlfluff
+    sql-formatter
+    sqls
+    rustfmt
+    rust-analyzer
+    flutter
+    android-tools
+    goose
   ];
 
   programs.nvf = {
     enable = true;
     settings = {
       vim = {
+        extraLuaFiles = [
+          ./lua/disable_sql_format.lua
+          ./lua/dartSDKpath.lua
+        ];
         clipboard.enable = true;
         startPlugins = with pkgs; [
           vimPlugins.nvim-web-devicons
@@ -32,6 +45,7 @@
         ];
         utility = {
           leetcode-nvim.enable = true;
+          leetcode-nvim.setupOpts.lang = "golang";
           oil-nvim.enable = true;
 
         };
@@ -59,20 +73,18 @@
         };
 
         formatter = {
-          conform-nvim.enable = true;
+          conform-nvim = {
+            enable = true;
+            setupOpts.formatters_by_ft = {
+              sql = [
+                "sql-formatter"
+              ];
+            };
+          };
         };
 
         fzf-lua.enable = true;
 
-        assistant = {
-          chatgpt.mappings.grammarCorrection.enable = true;
-          copilot = {
-            enable = false;
-            cmp = {
-              enable = true;
-            };
-          };
-        };
         debugger = {
           nvim-dap.enable = true;
         };
@@ -83,13 +95,15 @@
           config.signs = true;
           config.virtual_text = true;
         };
+
         lsp = {
           enable = true;
           formatOnSave = true;
           inlayHints.enable = true;
-          lightbulb.enable = true;
+          lightbulb.enable = false;
           trouble.enable = true;
         };
+
         languages = {
           nix = {
             enable = true;
@@ -102,6 +116,26 @@
               "statix"
               "deadnix"
             ];
+          };
+          rust = {
+            enable = true;
+            lsp.enable = true;
+            dap.enable = true;
+            format.enable = true;
+            format.type = [ "rustfmt" ];
+            treesitter.enable = true;
+          };
+
+          dart = {
+            enable = true;
+            lsp.enable = false;
+            dap.enable = false;
+            treesitter.enable = true;
+            flutter-tools = {
+              enable = true;
+              color.enable = true;
+              color.virtualText.enable = true;
+            };
           };
           python = {
             enable = true;
@@ -132,6 +166,13 @@
             dap.enable = true;
             format.enable = true;
             format.type = [ "golines" ];
+            lsp.enable = true;
+            treesitter.enable = true;
+          };
+          sql = {
+            enable = true;
+            extraDiagnostics.enable = true;
+            format.enable = false;
             lsp.enable = true;
             treesitter.enable = true;
           };

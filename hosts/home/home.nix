@@ -14,6 +14,14 @@
   };
   programs = {
     home-manager.enable = true;
+    rofi = {
+      enable = true;
+      extraConfig = {
+        font = "JetBrains Mono 18";
+        configPath = "./../../modules/rofi/config.rasi";
+      };
+    };
+
     git = {
       enable = true;
       settings = {
@@ -40,7 +48,7 @@
       shellAliases = {
         ll = "ls -l";
         update = "sudo nixos-rebuild switch --flake ~/flake/#default";
-        flake = "vim ~/flake/flake.nix";
+        flake = "cd ~/flake && vim ~/flake/flake.nix";
         home = "vim ~/flake/hosts/home/home.nix";
         config = "vim ~/flake/hosts/home/configuration.nix";
         pynix = "nix-shell ~/code/shell.nix";
