@@ -10,6 +10,7 @@
     ../../modules/printer/printer.nix
     ../../modules/nvim/nvf.nix
     ../../modules/leftwm/leftwm.nix
+    ../../modules/hyprland/hyprland.nix
     #../../modules/nvim/nixvim.nix
   ];
 

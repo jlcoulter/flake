@@ -27,10 +27,11 @@
     pipewire
     wireplumber
     hyprpolkitagent
-    hyprsunset
+    #hyprsunset
     # hypridle
     # hyprlock
     nwg-look
     pywal
+    copyq
   ];
 }

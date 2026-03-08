@@ -27,6 +27,7 @@
     flutter
     android-tools
     goose
+    wl-clipboard
   ];
 
   programs.nvf = {
