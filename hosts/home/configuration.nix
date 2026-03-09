@@ -73,6 +73,7 @@
     ];
     packages = with pkgs; [
       kdePackages.kate
+      chromium
       postgresql
       neovim
       git
@@ -80,13 +81,10 @@
       thunderbird
       element-desktop
       easyeffects
-      marktext
-      vscode
       nmap
       gimp
       spotify
       mgba
-      libreoffice
       rpi-imager
       nfs-utils
       vlc
@@ -95,7 +93,6 @@
       direnv
       nix-direnv
       unzip
-      ollama
       ripgrep
       fd
       dbeaver-bin

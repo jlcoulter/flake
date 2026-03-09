@@ -1,28 +1,29 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/";
     nixpkgs-python.url = "github:cachix/nixpkgs-python";
     nvf.url = "github:notashelf/nvf/v0.8";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
   outputs =
     {
+      self,
       nixpkgs,
       nvf,
       ...
     }@inputs:
     {
       nixosConfigurations.default = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit self inputs; };
         modules = [
           ./hosts/home/configuration.nix
-          nvf.nixosModules.default
           inputs.home-manager.nixosModules.default
+          nvf.nixosModules.default
         ];
       };
     };

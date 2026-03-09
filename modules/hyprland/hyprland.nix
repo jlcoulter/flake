@@ -33,5 +33,6 @@
     nwg-look
     pywal
     copyq
+    nordic
   ];
 }

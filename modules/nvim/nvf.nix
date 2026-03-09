@@ -20,7 +20,6 @@
     pyright
     xclip
     sqlfluff
-    sql-formatter
     sqls
     rustfmt
     rust-analyzer
@@ -28,25 +27,23 @@
     android-tools
     goose
     wl-clipboard
+    nodejs
+    golines
+    tree-sitter
   ];
 
   programs.nvf = {
     enable = true;
     settings = {
       vim = {
-        extraLuaFiles = [
-          ./lua/disable_sql_format.lua
-          ./lua/dartSDKpath.lua
-        ];
         clipboard.enable = true;
         startPlugins = with pkgs; [
           vimPlugins.nvim-web-devicons
           vimPlugins.nvim-neoclip-lua
           vimPlugins.blink-indent
+          vimPlugins.mason-nvim
         ];
         utility = {
-          leetcode-nvim.enable = true;
-          leetcode-nvim.setupOpts.lang = "golang";
           oil-nvim.enable = true;
 
         };
@@ -60,6 +57,8 @@
         autocomplete = {
           blink-cmp.enable = true;
         };
+
+        mini.icons.enable = true;
 
         theme = {
           enable = true;
@@ -76,11 +75,6 @@
         formatter = {
           conform-nvim = {
             enable = true;
-            setupOpts.formatters_by_ft = {
-              sql = [
-                "sql-formatter"
-              ];
-            };
           };
         };
 
@@ -124,6 +118,15 @@
             dap.enable = true;
             format.enable = true;
             format.type = [ "rustfmt" ];
+            treesitter.enable = true;
+          };
+
+          svelte = {
+            enable = true;
+            lsp.enable = true;
+            format.enable = false;
+            extraDiagnostics.enable = true;
+            extraDiagnostics.types = [ "eslint_d" ];
             treesitter.enable = true;
           };
 
