@@ -9,9 +9,8 @@
     ../../modules/virt/virt.nix
     ../../modules/printer/printer.nix
     ../../modules/nvim/nvf.nix
-    ../../modules/leftwm/leftwm.nix
-    ../../modules/hyprland/hyprland.nix
-    #../../modules/nvim/nixvim.nix
+    #../../modules/leftwm/leftwm.nix
+    #../../modules/hyprland/hyprland.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -46,6 +45,8 @@
       enable = true;
       xkb.layout = "us";
     };
+    desktopManager.plasma6.enable = true;
+    displayManager.sddm.enable = true;
 
     printing.enable = true;
     pulseaudio.enable = false;
@@ -55,6 +56,13 @@
       alsa.support32Bit = true;
       pulse.enable = true;
     };
+  };
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = [
+      pkgs.kdePackages.xdg-desktop-portal-kde
+    ];
   };
 
   security.rtkit.enable = true;
@@ -97,6 +105,8 @@
       fd
       dbeaver-bin
       postgresql
+      vscode
+      ollama
     ];
   };
 

@@ -1,3 +1,5 @@
+{ config, pkgs, ... }:
+
 {
   imports = [
     ./theme.nix
@@ -13,6 +15,7 @@
     #"config.ron".source = ../modules/leftwm;
   };
   programs = {
+
     home-manager.enable = true;
     rofi = {
       enable = true;

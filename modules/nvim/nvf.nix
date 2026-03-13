@@ -1,4 +1,7 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  ...
+}:
 {
   environment.systemPackages = with pkgs; [
     nixd
@@ -29,13 +32,28 @@
     wl-clipboard
     nodejs
     golines
+    eslint_d
+    svelte-language-server
     tree-sitter
+    tailwindcss
+    tailwindcss-language-server
+    typescript
+    typescript-language-server
   ];
 
   programs.nvf = {
     enable = true;
     settings = {
       vim = {
+
+        treesitter = {
+          enable = true;
+          autotagHtml = true;
+          context.enable = true;
+          fold = true;
+          textobjects.enable = true;
+
+        };
         clipboard.enable = true;
         startPlugins = with pkgs; [
           vimPlugins.nvim-web-devicons
@@ -52,7 +70,6 @@
         statusline.lualine.enable = true;
         telescope.enable = true;
         globals.mapleader = ",";
-        treesitter.enable = true;
 
         autocomplete = {
           blink-cmp.enable = true;
@@ -102,6 +119,7 @@
         languages = {
           nix = {
             enable = true;
+            treesitter.enable = true;
             format.enable = true;
             format.type = [ "nixfmt" ];
             lsp.enable = true;
@@ -114,27 +132,28 @@
           };
           rust = {
             enable = true;
+            treesitter.enable = true;
             lsp.enable = true;
             dap.enable = true;
             format.enable = true;
             format.type = [ "rustfmt" ];
-            treesitter.enable = true;
           };
 
           svelte = {
             enable = true;
+            treesitter.enable = true;
             lsp.enable = true;
-            format.enable = false;
+            format.enable = true;
+            format.type = [ "prettier" ];
             extraDiagnostics.enable = true;
             extraDiagnostics.types = [ "eslint_d" ];
-            treesitter.enable = true;
           };
 
           dart = {
             enable = true;
+            treesitter.enable = true;
             lsp.enable = false;
             dap.enable = false;
-            treesitter.enable = true;
             flutter-tools = {
               enable = true;
               color.enable = true;
@@ -143,49 +162,66 @@
           };
           python = {
             enable = true;
+            treesitter.enable = true;
             lsp.enable = true;
             dap.enable = true;
             format.enable = true;
+          };
+          ts = {
+            enable = true;
             treesitter.enable = true;
+            lsp.enable = true;
+            format.enable = true;
           };
           yaml = {
             enable = true;
+            treesitter.enable = true;
             lsp.enable = true;
           };
           lua = {
             enable = true;
+            treesitter.enable = true;
             lsp.enable = true;
             format.type = [ "stylua" ];
           };
           css = {
             enable = true;
+            treesitter.enable = true;
             lsp.enable = true;
           };
+          tailwind = {
+            enable = true;
+            lsp.enable = true;
+          };
+
           html = {
             enable = true;
+            treesitter.enable = true;
             lsp.enable = true;
           };
           go = {
             enable = true;
+            treesitter.enable = true;
             dap.enable = true;
             format.enable = true;
             format.type = [ "golines" ];
             lsp.enable = true;
-            treesitter.enable = true;
           };
           sql = {
             enable = true;
+            treesitter.enable = true;
             extraDiagnostics.enable = true;
             format.enable = false;
             lsp.enable = true;
-            treesitter.enable = true;
           };
           terraform = {
             enable = true;
+            treesitter.enable = true;
             lsp.enable = true;
           };
           markdown = {
             enable = true;
+            treesitter.enable = true;
             format.enable = true;
             lsp.enable = true;
             extensions.markview-nvim.enable = true;

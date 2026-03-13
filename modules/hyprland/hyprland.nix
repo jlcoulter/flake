@@ -4,11 +4,11 @@
 }:
 {
   programs = {
-    hyprland.enable = true;
-    sway.enable = true;
-    waybar.enable = true;
+    # hyprland.enable = true;
+    # sway.enable = true;
+    # waybar.enable = true;
   };
-  programs.uwsm.enable = true;
+  programs.uwsm.enable = false;
   programs.uwsm.waylandCompositors = {
     hyprland = {
       prettyName = "Hyprland";
@@ -16,6 +16,7 @@
       binPath = "/run/current-system/sw/bin/Hyprland";
     };
   };
+  #../../components/editor/examples/full/editor.svelte};
 
   #  services.displayManager.ly.enable = true;
 
