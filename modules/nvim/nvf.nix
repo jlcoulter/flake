@@ -31,6 +31,7 @@
     goose
     wl-clipboard
     nodejs
+    pnpm
     golines
     eslint_d
     svelte-language-server

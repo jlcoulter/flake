@@ -65,6 +65,7 @@
     ];
   };
 
+  programs.nix-ld.enable = true;
   security.rtkit.enable = true;
 
   fonts.packages = with pkgs; [
@@ -88,6 +89,8 @@
       alacritty
       thunderbird
       element-desktop
+      inkscape
+      drawio
       easyeffects
       nmap
       gimp
@@ -106,20 +109,13 @@
       dbeaver-bin
       postgresql
       vscode
+      bruno
+      docker-compose
+      tree
+      claude-code
       ollama
+      teams-for-linux
     ];
-  };
-
-  services.postgresql = {
-    enable = true;
-    ensureDatabases = [
-      "openLibrary"
-      "userData"
-    ];
-    authentication = pkgs.lib.mkOverride 10 ''
-      #type database  DBuser  auth-method
-      local all       all     trust
-    '';
   };
 
   programs = {
