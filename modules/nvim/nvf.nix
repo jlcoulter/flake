@@ -15,7 +15,8 @@
     exercism
     delve
     terraform
-    terraform-ls
+    opentofu
+    tofu-ls
     ansible
     ansible-lint
     stylua
@@ -24,22 +25,16 @@
     xclip
     sqlfluff
     sqls
-    rustfmt
-    rust-analyzer
-    flutter
-    android-tools
     goose
     wl-clipboard
     nodejs
     pnpm
     golines
     eslint_d
-    svelte-language-server
     tree-sitter
-    tailwindcss
-    tailwindcss-language-server
-    typescript
-    typescript-language-server
+    vale-ls
+    marksman
+    ltex-ls
   ];
 
   programs.nvf = {
@@ -57,7 +52,6 @@
         };
         clipboard.enable = true;
         startPlugins = with pkgs; [
-          vimPlugins.nvim-web-devicons
           vimPlugins.nvim-neoclip-lua
           vimPlugins.blink-indent
           vimPlugins.mason-nvim
@@ -131,71 +125,7 @@
               "deadnix"
             ];
           };
-          rust = {
-            enable = true;
-            treesitter.enable = true;
-            lsp.enable = true;
-            dap.enable = true;
-            format.enable = true;
-            format.type = [ "rustfmt" ];
-          };
-
-          svelte = {
-            enable = true;
-            treesitter.enable = true;
-            lsp.enable = true;
-            format.enable = true;
-            format.type = [ "prettier" ];
-            extraDiagnostics.enable = true;
-            extraDiagnostics.types = [ "eslint_d" ];
-          };
-
-          dart = {
-            enable = true;
-            treesitter.enable = true;
-            lsp.enable = false;
-            dap.enable = false;
-            flutter-tools = {
-              enable = true;
-              color.enable = true;
-              color.virtualText.enable = true;
-            };
-          };
-          python = {
-            enable = true;
-            treesitter.enable = true;
-            lsp.enable = true;
-            dap.enable = true;
-            format.enable = true;
-          };
-          ts = {
-            enable = true;
-            treesitter.enable = true;
-            lsp.enable = true;
-            format.enable = true;
-          };
           yaml = {
-            enable = true;
-            treesitter.enable = true;
-            lsp.enable = true;
-          };
-          lua = {
-            enable = true;
-            treesitter.enable = true;
-            lsp.enable = true;
-            format.type = [ "stylua" ];
-          };
-          css = {
-            enable = true;
-            treesitter.enable = true;
-            lsp.enable = true;
-          };
-          tailwind = {
-            enable = true;
-            lsp.enable = true;
-          };
-
-          html = {
             enable = true;
             treesitter.enable = true;
             lsp.enable = true;
@@ -208,24 +138,18 @@
             format.type = [ "golines" ];
             lsp.enable = true;
           };
-          sql = {
-            enable = true;
-            treesitter.enable = true;
-            extraDiagnostics.enable = true;
-            format.enable = false;
-            lsp.enable = true;
-          };
-          terraform = {
-            enable = true;
-            treesitter.enable = true;
-            lsp.enable = true;
-          };
           markdown = {
             enable = true;
             treesitter.enable = true;
             format.enable = true;
             lsp.enable = true;
+            lsp.servers = [ "marksman" ];
             extensions.markview-nvim.enable = true;
+          };
+          terraform = {
+            enable = true;
+            treesitter.enable = true;
+            lsp.enable = true;
           };
         };
       };

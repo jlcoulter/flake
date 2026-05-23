@@ -4,12 +4,13 @@
   imports = [
     ./hardware-configuration.nix
     ../system/system.nix
-    ../system/nfs.nix
+    #../system/nfs.nix
     ../../modules/bluetooth/bluetooth.nix
     ../../modules/virt/virt.nix
     ../../modules/printer/printer.nix
     ../../modules/nvim/nvf.nix
     #../../modules/leftwm/leftwm.nix
+    #../../modules/xmonad/xmonad.nix
     #../../modules/hyprland/hyprland.nix
   ];
 
@@ -82,19 +83,29 @@
     ];
     packages = with pkgs; [
       kdePackages.kate
+      discord
       chromium
       postgresql
       neovim
       git
+      lazygit
+      firebase-tools
+      hugo
+      jq
+      wget
       alacritty
+      certbot
+      spotify
       thunderbird
+      darktable
       element-desktop
       inkscape
+      signal-desktop
       drawio
       easyeffects
       nmap
       gimp
-      spotify
+      # spotify
       mgba
       rpi-imager
       nfs-utils
@@ -115,8 +126,13 @@
       claude-code
       ollama
       teams-for-linux
+      drive
+      slack
+      satisfactorymodmanager
     ];
   };
+
+  services.flatpak.enable = true;
 
   programs = {
     firefox.enable = true;

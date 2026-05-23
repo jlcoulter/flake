@@ -13,6 +13,7 @@ in
 
   fileSystems."/home/jc/nasBK" = {
     device = "dev/disk/by-uuid/887f72ac-bcb0-4b21-a3b5-b6bed37b90c9";
+    fsType = "ext4";
   };
 
   time.timeZone = "Australia/Sydney";

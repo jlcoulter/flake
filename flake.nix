@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-python.url = "github:cachix/nixpkgs-python";
     nvf.url = "github:notashelf/nvf/";
 
