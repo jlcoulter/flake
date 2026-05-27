@@ -8,7 +8,17 @@
     ../../modules/bluetooth/bluetooth.nix
     ../../modules/virt/virt.nix
     ../../modules/printer/printer.nix
-    ../../modules/nvim/nvf.nix
+    ../../modules/nvim/base.nix
+    ../../modules/nvim/languages/nix.nix
+    ../../modules/nvim/languages/go.nix
+    ../../modules/nvim/languages/yaml.nix
+    ../../modules/nvim/languages/json.nix
+    ../../modules/nvim/languages/html.nix
+    ../../modules/nvim/languages/svelte.nix
+    ../../modules/nvim/languages/python.nix
+    ../../modules/nvim/languages/markdown.nix
+    ../../modules/nvim/languages/terraform.nix
+    ../../modules/nvim/languages/sql.nix
     #../../modules/leftwm/leftwm.nix
     #../../modules/xmonad/xmonad.nix
     #../../modules/hyprland/hyprland.nix

@@ -2,7 +2,11 @@
 
 {
   imports = [
-    ../../modules/nvim/nvf.nix
+    ../../modules/nvim/base.nix
+    ../../modules/nvim/languages/nix.nix
+    ../../modules/nvim/languages/go.nix
+    ../../modules/nvim/languages/yaml.nix
+    ../../modules/nvim/languages/json.nix
   ];
 
   nixpkgs.config.allowUnfree = true;

@@ -1,6 +1,13 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, ... }:
+{
   imports = [
-    ../../modules/nvim/nvf.nix
+    ../../modules/nvim/base.nix
+    ../../modules/nvim/languages/go.nix
+    ../../modules/nvim/languages/svelte.nix
+    ../../modules/nvim/languages/yaml.nix
+    ../../modules/nvim/languages/json.nix
+    ../../modules/nvim/languages/html.nix
+    ../../modules/nvim/languages/nix.nix
   ];
 
   system.primaryUser = "jlcoulter";
@@ -32,3 +39,4 @@
 
   system.stateVersion = 5;
 }
+
