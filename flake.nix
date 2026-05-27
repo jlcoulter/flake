@@ -41,7 +41,7 @@
 	inputs.home-manager.darwinModules.home-manager {
 		home-manager.useGlobalPkgs = true;
 		home-manager.useUserPackages = true;
-		home-manager.users.jlcoulter = import ./modules/shared/home.nix;
+		home-manager.users.jlcoulter = import ./hosts/macbook/home.nix;
 }
 ];
 	};

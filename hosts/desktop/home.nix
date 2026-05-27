@@ -2,22 +2,14 @@
 
 {
   imports = [
+    ../../modules/shared/home.nix
     ./theme.nix
   ];
-  home = {
 
-    username = "jc";
-    homeDirectory = "/home/jc";
-    stateVersion = "24.11";
-  };
-
-  home.file = {
-    #"config.ron".source = ../modules/leftwm;
-  };
+  home.file = {};
 
   home.packages = with pkgs; [
-    fira-code
-    fira-code-symbols
+    # Additional desktop-specific packages
   ];
 
   programs.kitty = {
@@ -29,44 +21,37 @@
     };
 
     settings = {
-      # Window settings
       background_opacity = "1.0";
       background_blur = 1;
-
-      # Ligature support explicitly on
       disable_ligatures = "never";
 
-      # Fonts
       bold_font = "Fira Code Bold";
       italic_font = "Fira Code Italic";
       bold_italic_font = "Fira Code Bold Italic";
 
-      # Gruvbox Material Main Colors
-      background = "#282828"; # bg0
-      foreground = "#D4BE98"; # fg0
-      selection_background = "#D4BE98"; # fg0
-      selection_foreground = "#282828"; # bg0
-      cursor = "#A89984"; # grey2
+      background = "#282828";
+      foreground = "#D4BE98";
+      selection_background = "#D4BE98";
+      selection_foreground = "#282828";
+      cursor = "#A89984";
 
-      # Normal Colors (Gruvbox Material Palette)
-      color0 = "#282828"; # bg0 (Black)
-      color1 = "#EA6962"; # red
-      color2 = "#A9B665"; # green
-      color3 = "#D8A657"; # yellow
-      color4 = "#7DAEA3"; # blue
-      color5 = "#D3869B"; # purple / magenta (using bright variant for visibility)
-      color6 = "#89B482"; # aqua / cyan
-      color7 = "#D4BE98"; # fg0 (White)
+      color0 = "#282828";
+      color1 = "#EA6962";
+      color2 = "#A9B665";
+      color3 = "#D8A657";
+      color4 = "#7DAEA3";
+      color5 = "#D3869B";
+      color6 = "#89B482";
+      color7 = "#D4BE98";
 
-      # Bright Colors
-      color8 = "#7C6F64"; # grey0 (Bright Black)
-      color9 = "#EA6962"; # red
-      color10 = "#A9B665"; # green
-      color11 = "#D8A657"; # yellow
-      color12 = "#7DAEA3"; # blue
-      color13 = "#D3869B"; # purple
-      color14 = "#89B482"; # aqua
-      color15 = "#DDC7A1"; # fg1 (Bright White)
+      color8 = "#7C6F64";
+      color9 = "#EA6962";
+      color10 = "#A9B665";
+      color11 = "#D8A657";
+      color12 = "#7DAEA3";
+      color13 = "#D3869B";
+      color14 = "#89B482";
+      color15 = "#DDC7A1";
     };
   };
 
@@ -114,8 +99,8 @@
       };
     };
   };
-  programs = {
 
+  programs = {
     yazi = {
       settings = {
         opener = {
@@ -139,11 +124,6 @@
       };
     };
 
-    neovim = {
-      defaultEditor = true;
-      viAlias = true;
-      vimAlias = true;
-    };
     i3status-rust = {
       enable = true;
       bars = {
@@ -180,17 +160,9 @@
         };
       };
     };
-    zellij = {
-      enable = true;
-      enableZshIntegration = true;
-    };
 
     zsh = {
       enable = true;
-      autosuggestion.enable = true;
-      enableCompletion = true;
-      syntaxHighlighting.enable = true;
-      autocd = true;
       shellAliases = {
         ll = "ls -l";
         update = "sudo nixos-rebuild switch --flake ~/flake/#default";
@@ -200,13 +172,6 @@
         pynix = "nix-shell ~/code/shell.nix";
         nvimconfig = "vim ~/.config/nvim/init.vim";
         clobber = "git add . && git commit -m \"$(date)\" && git push";
-      };
-      oh-my-zsh = {
-        enable = true;
-        plugins = [
-          "git"
-        ];
-        theme = "agnoster";
       };
     };
   };
@@ -226,9 +191,4 @@
       name = "capitaine-cursors-gruvbox";
     };
   };
-
-  home.sessionVariables = {
-    EDITOR = "vim";
-  };
-
 }
