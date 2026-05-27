@@ -55,6 +55,8 @@
           vimPlugins.nvim-neoclip-lua
           vimPlugins.blink-indent
           vimPlugins.mason-nvim
+          vimPlugins.gruvbox-material
+          vscode-extensions.sainnhe.gruvbox-material
         ];
         utility = {
           oil-nvim.enable = true;
@@ -63,19 +65,23 @@
         autopairs.nvim-autopairs.enable = true;
         options.shiftwidth = 4;
         statusline.lualine.enable = true;
+        statusline.lualine.theme = "gruvbox-material";
         telescope.enable = true;
         globals.mapleader = ",";
 
         autocomplete = {
-          blink-cmp.enable = true;
+          nvim-cmp.enable = true;
         };
 
         mini.icons.enable = true;
 
         theme = {
           enable = true;
-          name = "tokyonight";
-          style = "moon";
+          #name = "gruvbox";
+          #style = "dark";
+          transparent = true;
+          #extraConfig = {
+          #};
         };
 
         git = {

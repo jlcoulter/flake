@@ -6,12 +6,15 @@ blur = true
 size = 14
 
 [font.normal]
-family = "JetBrains Mono"
+family = "Fira Code"
 style = "Regular"
 
+[font.italic]
+family = "Fira Code"
+style = "Italic"
 
 [font.bold]
-family = "JetBrains Mono"
+family = "Fira Code"
 style = "Regular"
 
 [colors.dim]

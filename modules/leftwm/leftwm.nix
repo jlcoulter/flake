@@ -6,7 +6,7 @@
   services = {
     xserver = {
       enable = true;
-      windowManager.leftwm.enable = true;
+      windowManager.i3.enable = true;
     };
 
     displayManager.ly.enable = true;

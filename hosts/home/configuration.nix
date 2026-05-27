@@ -41,13 +41,34 @@
   };
 
   services = {
+    picom.enable = true;
     rsync.enable = true;
     xserver = {
       enable = true;
+      excludePackages = [ pkgs.xterm ];
+      displayManager.setupCommands = ''
+        ${pkgs.xorg.xrandr} --setmonitor "Virtual-Left" 1280/232x2160/392+0+0 DP-1
+        ${pkgs.xorg.xrandr} --setmonitor "Virtual-CenterMain" 2560/465x2160/392+1280+0 DP-1
+        ${pkgs.xorg.xrandr} --setmonitor "Virtual-Right" 1280/232x2160/392+3840+0 DP-1
+      '';
+      deviceSection = ''
+        Option "TearFree" "true"
+      '';
+      desktopManager = {
+        xterm.enable = false;
+      };
+      windowManager.i3 = {
+        enable = true;
+        extraPackages = with pkgs; [
+          dmenu
+          i3status-rust
+        ];
+
+      };
       xkb.layout = "us";
     };
-    desktopManager.plasma6.enable = true;
-    displayManager.sddm.enable = true;
+    desktopManager.plasma6.enable = false;
+    displayManager.ly.enable = true;
 
     printing.enable = true;
     pulseaudio.enable = false;
@@ -59,18 +80,24 @@
     };
   };
 
-  xdg.portal = {
-    enable = true;
-    extraPortals = [
-      pkgs.kdePackages.xdg-desktop-portal-kde
-    ];
+  programs = {
+    dconf.enable = true;
+    nix-ld.enable = true;
+
   };
 
-  programs.nix-ld.enable = true;
-  security.rtkit.enable = true;
+  security = {
+    rtkit.enable = true;
+  };
+  security.pam.services = {
+    i3lock-color.enable = true;
+
+  };
 
   fonts.packages = with pkgs; [
     jetbrains-mono
+    fira-code
+    fira-code-symbols
   ];
 
   users.users.jc = {
@@ -82,19 +109,26 @@
       "wheel"
     ];
     packages = with pkgs; [
-      kdePackages.kate
+      dunst
+      pipewire
+      wireplumber
+      lxappearance
+      pywal
+      feh
+      lsof
       discord
       chromium
+      yazi
+      fastfetch
+      kitty
       postgresql
       neovim
       git
       lazygit
-      firebase-tools
       hugo
       jq
       wget
       alacritty
-      certbot
       spotify
       thunderbird
       darktable
@@ -129,10 +163,9 @@
       drive
       slack
       satisfactorymodmanager
+      gruvbox-material-gtk-theme
     ];
   };
-
-  services.flatpak.enable = true;
 
   programs = {
     firefox.enable = true;
