@@ -6,7 +6,7 @@
     ./theme.nix
   ];
 
-  home.file = {};
+  home.file = { };
 
   home.packages = with pkgs; [
     # Additional desktop-specific packages
