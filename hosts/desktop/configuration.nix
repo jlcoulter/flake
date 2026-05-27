@@ -3,7 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../system/system.nix
+    ./system.nix
     #../system/nfs.nix
     ../../modules/bluetooth/bluetooth.nix
     ../../modules/virt/virt.nix
@@ -149,7 +149,7 @@
     extraSpecialArgs = { inherit inputs; };
     backupFileExtension = "backup";
     users = {
-      "jc" = import ./home.nix;
+      "jc" = import ../desktop/home.nix;
     };
   };
 
