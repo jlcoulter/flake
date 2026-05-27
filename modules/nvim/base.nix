@@ -23,13 +23,27 @@
           textobjects.enable = true;
         };
         clipboard.enable = true;
-        startPlugins = with pkgs; [
-          vimPlugins.nvim-neoclip-lua
-          vimPlugins.blink-indent
-          vimPlugins.mason-nvim
-          vimPlugins.gruvbox-material
-          vscode-extensions.sainnhe.gruvbox-material
-          vimPlugins.luasnip
+        startPlugins = with pkgs.vimPlugins; [
+          nvim-neoclip-lua
+          blink-indent
+          mason-nvim
+          gruvbox-material
+          harpoon
+          git-blame-nvim
+          nvim-spectre
+          bufferline-nvim
+          nvim-scrollview
+          noice-nvim
+          dressing-nvim
+          vim-fugitive
+          octo-nvim
+          refactoring-nvim
+          todo-comments-nvim
+          treewalker-nvim
+          which-key-nvim
+          vim-visual-multi
+          rainbow-delimiters-nvim
+          vim-illuminate
         ];
         utility = {
           oil-nvim.enable = true;
