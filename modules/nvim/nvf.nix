@@ -9,7 +9,6 @@
     statix
     deadnix
     gopls
-    libcap
     go
     gcc
     exercism
@@ -26,7 +25,6 @@
     sqlfluff
     sqls
     goose
-    wl-clipboard
     nodejs
     pnpm
     golines
