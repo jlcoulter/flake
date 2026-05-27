@@ -1,11 +1,43 @@
 { pkgs, lib, ... }:
+
+# =============================================================================
+# NVF PLUGIN OPTIONS - Uncomment to enable additional plugins
+# =============================================================================
+# ALREADY ENABLED:
+#   - nvim-neoclip-lua, blink-indent, mason-nvim, gruvbox-material
+#   - luasnip, oil-nvim, telescope, fzf-lua
+#   - lualine, nvim-cmp, mini-icons
+#   - theme (gruvbox, transparent)
+#   - gitsigns, conform-nvim, nvim-dap
+#   - diagnostics, lsp (with trouble, inlay hints)
+#   - treesitter (all features)
+#
+# AVAILABLE TO ENABLE:
+#   git.fugitive.enable = true           # Git wrapper (:G)
+#   git.git-messenger.enable = true        # Inline blame
+#   git.neogit.enable = true              # Git TUI
+#   notify.nvim-notify.enable = true      # Notifications
+#   which-key.enable = true              # Keybinding hints
+#   toggleterm.enable = true              # Terminal integration
+#   zen-mode-nvim.enable = true          # Zen mode
+#   debugger.dap-ui.enable = true         # DAP UI
+#   debugger.dap-virtual-text.enable = true
+#   aerial-nvim.enable = true             # Symbol outline
+#   mini-ai.enable = true                 # AI indent object
+#   rainbow-delimiters.enable = true       # Rainbow brackets
+#
+# =============================================================================
+
 {
-  environment.systemPackages = with pkgs; [
-    tree-sitter
-    fzf
-    ripgrep
-    fd
-  ] ++ lib.optionals pkgs.stdenv.isLinux [ xclip ];
+  environment.systemPackages =
+    with pkgs;
+    [
+      tree-sitter
+      fzf
+      ripgrep
+      fd
+    ]
+    ++ lib.optionals pkgs.stdenv.isLinux [ xclip ];
 
   programs.nvf = {
     enable = true;
@@ -27,29 +59,8 @@
           vimPlugins.gruvbox-material
           vscode-extensions.sainnhe.gruvbox-material
 
-          # Navigation & Motion
-          vimPlugins.leap-nvim
-          vimPlugins.vim-visual-multi
-          vimPlugins.sneak
-          vimPlugins.easymotion
-
-          # Git
-          vimPlugins.fugitive
-          vimPlugins.gitsigns
-          vimPlugins.git-messenger
-
-          # UI Enhancements
-          vimPlugins.nvim-notify
-          vimPlugins.toggleterm-nvim
-          vimPlugins.which-key-nvim
-          vimPlugins.telescope-undo-nvim
-
           # Snippets
           vimPlugins.luasnip
-
-          # Testing
-          vimPlugins.neotest
-          vimPlugins.nvim-jdtls
         ];
         utility = {
           oil-nvim.enable = true;
@@ -59,27 +70,15 @@
           shiftwidth = 4;
           tabstop = 4;
           expandtab = true;
-          smartindent = true;
-          autoindent = true;
-          indentexpr = "";
-          scrolloff = 8;
-          sidescrolloff = 8;
-          splitright = true;
-          splitbelow = true;
-          showmode = false;
-          signcolumn = "yes";
-          colorcolumn = "80";
-          mouse = "a";
         };
         statusline.lualine.enable = true;
         statusline.lualine.theme = "gruvbox-material";
         telescope.enable = true;
-        globals.mapleader = " ";
+        globals.mapleader = ",";
         globals.maplocalleader = "\\";
 
         autocomplete = {
           nvim-cmp.enable = true;
-          nvim-cmp.cmdlines = true;
         };
 
         mini.icons.enable = true;
@@ -92,11 +91,6 @@
         git = {
           enable = true;
           gitsigns.enable = true;
-          gitsigns.codeActions.enable = false;
-          gitsigns.signs = true;
-          gitsigns.numhl = true;
-          gitsigns.linehl = true;
-          gitsigns.current_line_blame = true;
         };
 
         formatter = {
@@ -109,15 +103,10 @@
 
         debugger = {
           nvim-dap.enable = true;
-          dap-ui.enable = true;
         };
+
         diagnostics = {
           enable = true;
-          nvim-lint.enable = true;
-          nvim-lint.lint_after_save = true;
-          config.signs = true;
-          config.virtual_text = true;
-          config.severity_sort = true;
         };
 
         lsp = {
@@ -126,45 +115,6 @@
           inlayHints.enable = true;
           lightbulb.enable = false;
           trouble.enable = true;
-        };
-
-        which-key = {
-          enable = true;
-          register_mappings = {
-            normal_mode = {
-              ["<leader>"] = {
-                name = "General";
-                ["w"] = { "<cmd>w<cr>", "Save" };
-                ["q"] = { "<cmd>q<cr>", "Quit" };
-                ["/"] = { "<cmd>CommentToggle<cr>", "Comment" };
-                ["."] = { "<cmd>cd ~/dotfiles<cr>", "Dotfiles" };
-              };
-              ["g"] = {
-                name = "Go to";
-                ["d"] = { "<cmd>GoToDebugConsole<cr>", "Debug Console" };
-              };
-            };
-            visual_mode = {
-              ["<leader>"] = {
-                name = "Visual";
-                ["/"] = { "<cmd>CommentToggle<cr>", "Comment" };
-                ["p"] = { "\"_dP", "Paste without yank" };
-              };
-            };
-          };
-        };
-
-        notify = {
-          enable = true;
-        };
-
-        terminal = {
-          toggleterm = {
-            enable = true;
-            size = 20;
-            open_mapping = "<c-\\>";
-            direction = "horizontal";
-          };
         };
       };
     };

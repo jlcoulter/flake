@@ -12,50 +12,50 @@
 
 ## Navigation & Motion
 
-### Leap (`leap.nvim`)
-- `s` - Jump to any character (forward)
-- `S` - Jump to any character (backward)
-- `sa` - Jump to any character (including search)
-- `f` / `F` - Built-in vim forward/backward
+### Built-in Vim
+- `f` / `F` - Forward/backward to character
+- `t` / `T` - Forward/backward to before character
+- `w` / `b` - Word forward/backward
+- `e` / `ge` - Word end forward/backward
+- `0` / `$` - Line start/end
+- `gg` / `G` - File start/end
+- `Ctrl-u` / `Ctrl-d` - Half page up/down
+- `zz` - Center cursor
 
-### EasyMotion (`easymotion`)
-- `<Leader><Leader>w` - Word forward
-- `<Leader><Leader>b` - Word backward
-- `<Leader><Leader>j` - Line down
-- `<Leader><Leader>k` - Line up
+### Telescope (enabled by default via nvf)
+- `:Telescope find_files` - Find files
+- `:Telescope live_grep` - Live grep
+- `:Telescope buffers` - Buffers
+- `:Telescope recent` - Recent files
+- `:Telescope help_tags` - Help tags
+- `:Telescope commands` - Commands
+- `:Telescope undo` - Undo history
 
-### Telescope
-- `<Leader>ff` - Find files
-- `<Leader>fg` - Live grep
-- `<Leader>fb` - Buffers
-- `<Leader>fh` - Help tags
-- `<Leader>fr` - Recent files
-- `<Leader>fu` - Undo history
-- `<Leader>fc` - Commands
-
-### FZF Lua
-- `<Leader>zf` - Files
-- `<Leader>zg` - Grep
-- `<Leader>zb` - Buffers
+### FZF Lua (alternative fuzzy finder)
+- `:FZF` - Open FZF
 
 ## Git
 
 ### Fugitive (`vim-fugitive`)
-- `<Leader>gs` - Git status
-- `<Leader>gc` - Git commit
-- `<Leader>gp` - Git push
-- `<Leader>gl` - Git log
-- `git checkout` / `git commit` - Standard git commands in vim
+- `:G` or `:Git` - Run any git command
+- `:G status` - Open status buffer
+- `:G diff` - Open diff view
+- `:G log` - Open log view
+- `:G commit` - Create commit
+- `:G push` - Push to remote
+- `:G pull` - Pull from remote
+- In status buffer: `cc` to commit, `ca` to amend, `p` to push
 
 ### Gitsigns
-- `[c` / `]c` - Next/previous hunk
-- `<Leader>hs` - Stage hunk
-- `<Leader>hr` - Reset hunk
-- `<Leader>hS` - Stage buffer
-- `<Leader>hu` - Undo stage
+- `]c` / `[c` - Next/previous hunk
+- `s` - Stage hunk (visual mode)
+- `S` - Stage buffer
+- `u` - Undo stage
+- `x` - Discard hunk
+- `p` - Preview hunk
 
 ### Git Messenger (`git-messenger`)
-- `<Leader>gm` - Show git blame for line
+- `<Leader>gm` - Show git blame for current line
 
 ## Debugging (DAP)
 
@@ -85,50 +85,46 @@
 
 ### Finding Files
 ```
-<Leader>ff     # Telescope find files
-<Leader>fg     # Live grep
-<Leader>fr     # Recent files
+:Telescope find_files
+:Telescope live_grep
+:Telescope buffers
+:Telescope recent
 ```
 
 ### Working with Git
 ```
-<Leader>gs     # Fugitive status
+:G status      # Open Fugitive
 ]c             # Next hunk
-<c             # Previous hunk
-<Leader>hs     # Stage hunk
+[c             # Previous hunk
+s              # Stage hunk (visual mode)
+:G commit      # Create commit
+:G push        # Push
 ```
 
 ### Debugging
 ```
-<F5>           # Start debug
-<F10>          # Step over
-<Leader>dr    # Open REPL
-<Leader>do     # Open Dap UI
+:F5             # Start debug (when Dap configured)
+:F10            # Step over
+:F11            # Step into
 ```
 
 ### Moving Around
 ```
-s              # Leap (jump to character)
-<Leader><Leader>w   # EasyMotion word forward
+f + char        # Forward to character
+F + char        # Backward to character
+t + char        # Forward to before character
+T + char        # Backward to before character
 ```
 
-## Plugins List
+## Plugins Enabled (via nvf)
 
 | Plugin | Purpose |
 |--------|---------|
-| `leap.nvim` | Bidirectional cursor movement |
-| `vim-visual-multi` | Multiple cursors |
-| `sneak` | Quick character jumps |
-| `easymotion` | Jump to any visible character |
 | `telescope` | Fuzzy finder |
 | `fzf-lua` | Alternative fuzzy finder |
 | `fugitive` | Git wrapper |
 | `gitsigns` | Git signs in gutter |
-| `git-messenger` | Inline git blame |
 | `nvim-dap` | Debug adapter protocol |
-| `dap-ui` | Debug UI |
-| `nvim-notify` | Notifications |
-| `which-key` | Keybinding hints |
-| `toggleterm` | Terminal integration |
 | `luasnip` | Snippets |
 | `oil.nvim` | File explorer |
+| `mason` | LSP/dap server management |
