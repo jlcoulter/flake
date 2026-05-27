@@ -1,9 +1,9 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   environment.systemPackages = with pkgs; [
-    xclip
     tree-sitter
-  ];
+    fzf
+  ] ++ (lib.optionals pkgs.stdenv.isLinux xclip);
 
   programs.nvf = {
     enable = true;
