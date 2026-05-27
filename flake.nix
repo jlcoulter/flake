@@ -42,7 +42,8 @@
 		home-manager.useGlobalPkgs = true;
 		home-manager.useUserPackages = true;
 		home-manager.users.jlcoulter = import ./hosts/macbook/home.nix;
-}
+	}
+	nvf.darwinModules.default
 ];
 	};
     };
