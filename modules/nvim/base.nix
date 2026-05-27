@@ -1,33 +1,5 @@
 { pkgs, lib, ... }:
 
-# =============================================================================
-# NVF PLUGIN OPTIONS - Uncomment to enable additional plugins
-# =============================================================================
-# ALREADY ENABLED:
-#   - nvim-neoclip-lua, blink-indent, mason-nvim, gruvbox-material
-#   - luasnip, oil-nvim, telescope, fzf-lua
-#   - lualine, nvim-cmp, mini-icons
-#   - theme (gruvbox, transparent)
-#   - gitsigns, conform-nvim, nvim-dap
-#   - diagnostics, lsp (with trouble, inlay hints)
-#   - treesitter (all features)
-#
-# AVAILABLE TO ENABLE:
-#   git.fugitive.enable = true           # Git wrapper (:G)
-#   git.git-messenger.enable = true        # Inline blame
-#   git.neogit.enable = true              # Git TUI
-#   notify.nvim-notify.enable = true      # Notifications
-#   which-key.enable = true              # Keybinding hints
-#   toggleterm.enable = true              # Terminal integration
-#   zen-mode-nvim.enable = true          # Zen mode
-#   debugger.dap-ui.enable = true         # DAP UI
-#   debugger.dap-virtual-text.enable = true
-#   aerial-nvim.enable = true             # Symbol outline
-#   mini-ai.enable = true                 # AI indent object
-#   rainbow-delimiters.enable = true       # Rainbow brackets
-#
-# =============================================================================
-
 {
   environment.systemPackages =
     with pkgs;
@@ -52,14 +24,11 @@
         };
         clipboard.enable = true;
         startPlugins = with pkgs; [
-          # Core plugins
           vimPlugins.nvim-neoclip-lua
           vimPlugins.blink-indent
           vimPlugins.mason-nvim
           vimPlugins.gruvbox-material
           vscode-extensions.sainnhe.gruvbox-material
-
-          # Snippets
           vimPlugins.luasnip
         ];
         utility = {
