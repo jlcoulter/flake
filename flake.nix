@@ -32,6 +32,27 @@
           nvf.nixosModules.default
         ];
       };
+
+      nixosConfigurations.server-amd = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit self inputs; };
+        modules = [
+          ./hosts/server/default.nix
+          inputs.home-manager.nixosModules.default
+          nvf.nixosModules.default
+        ];
+      };
+
+      nixosConfigurations.server-arm = nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+        specialArgs = { inherit self inputs; };
+        modules = [
+          ./hosts/server/default.nix
+          inputs.home-manager.nixosModules.default
+          nvf.nixosModules.default
+        ];
+      };
+
 	darwinConfigurations."macbook" = nix-darwin.lib.darwinSystem {
 	system = "aarch64-darwin";
 

@@ -176,8 +176,6 @@
   environment.systemPackages = with pkgs; [
     mesa
     vulkan-tools
-    libcap
-    wl-clipboard
   ];
 
   home-manager = {
