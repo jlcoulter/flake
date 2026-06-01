@@ -6,54 +6,21 @@
     ./theme.nix
   ];
 
-  home.file = { };
+  home.file = {
+    ".sqls.yaml" = {
+      text = ''
+        datasources:
+          - alias: hermes
+            connections:
+              - driver: postgresql
+                dataSourceName: "host=localhost port=5432 user=hermes dbname=hermes password=password"
+      '';
+    };
+  };
 
   home.packages = with pkgs; [
     # Additional desktop-specific packages
   ];
-
-  programs.kitty = {
-    enable = true;
-
-    font = {
-      name = "Fira Code";
-      size = 16;
-    };
-
-    settings = {
-      background_opacity = "1.0";
-      background_blur = 1;
-      disable_ligatures = "never";
-
-      bold_font = "Fira Code Bold";
-      italic_font = "Fira Code Italic";
-      bold_italic_font = "Fira Code Bold Italic";
-
-      background = "#282828";
-      foreground = "#D4BE98";
-      selection_background = "#D4BE98";
-      selection_foreground = "#282828";
-      cursor = "#A89984";
-
-      color0 = "#282828";
-      color1 = "#EA6962";
-      color2 = "#A9B665";
-      color3 = "#D8A657";
-      color4 = "#7DAEA3";
-      color5 = "#D3869B";
-      color6 = "#89B482";
-      color7 = "#D4BE98";
-
-      color8 = "#7C6F64";
-      color9 = "#EA6962";
-      color10 = "#A9B665";
-      color11 = "#D8A657";
-      color12 = "#7DAEA3";
-      color13 = "#D3869B";
-      color14 = "#89B482";
-      color15 = "#DDC7A1";
-    };
-  };
 
   xsession.windowManager.i3 = {
     enable = true;
@@ -101,29 +68,6 @@
   };
 
   programs = {
-    yazi = {
-      settings = {
-        opener = {
-          edit = [
-            {
-              run = "$EDITOR %s";
-              block = true;
-              desc = "Neovim";
-            }
-          ];
-        };
-
-        open = {
-          rules = [
-            {
-              name = "*";
-              use = [ "edit" ];
-            }
-          ];
-        };
-      };
-    };
-
     i3status-rust = {
       enable = true;
       bars = {
@@ -148,19 +92,6 @@
       };
     };
 
-    git = {
-      enable = true;
-      settings = {
-        user.name = "jlcoulter";
-        user.email = "coulter.l.jack@gmail.com";
-        aliases = {
-          pu = "push";
-          co = "checkout";
-          cm = "commit";
-        };
-      };
-    };
-
     zsh = {
       enable = true;
       shellAliases = {
@@ -176,8 +107,11 @@
     };
   };
 
+  gtk.gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
+
   gtk = {
     enable = true;
+    colorScheme = "dark";
     theme = {
       package = pkgs.gruvbox-material-gtk-theme;
       name = "Gruvbox-Material-Dark-Medium";

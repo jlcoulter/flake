@@ -120,6 +120,10 @@
     ];
     packages = with pkgs; [
       dunst
+      sqlite
+      gh
+      thunar
+      flameshot
       pipewire
       wireplumber
       lxappearance
@@ -162,7 +166,6 @@
       ripgrep
       fd
       dbeaver-bin
-      postgresql
       vscode
       bruno
       docker-compose
@@ -174,7 +177,33 @@
       slack
       satisfactorymodmanager
       gruvbox-material-gtk-theme
+      ansible
+      signal-cli
     ];
+  };
+
+  services.postgresql = {
+    enable = true;
+    ensureDatabases = [
+      "forgejo"
+      "proxyxform"
+    ];
+    ensureUsers = [
+      {
+        name = "proxyxform";
+        ensureDBOwnership = true;
+      }
+      {
+        name = "forgejo";
+        ensureDBOwnership = true;
+      }
+    ];
+    authentication = pkgs.lib.mkOverride 10 ''
+                  			#type database DBuser auth-method
+                  			local all all trust
+            						host all all 127.0.0.1/32 trust
+      									host all all ::1/128 trust
+                  		'';
   };
 
   programs = {

@@ -4,6 +4,7 @@
     python3
     black
     pyright
+    uv
   ];
 
   programs.nvf.settings.vim.languages.python = {
