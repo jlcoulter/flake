@@ -10,6 +10,9 @@
   programs.nvf.settings.vim.languages.sql = {
     enable = true;
     treesitter.enable = true;
-    lsp.enable = true;
+    lsp = {
+      enable = false;
+    };
   };
 }
+

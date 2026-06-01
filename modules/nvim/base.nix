@@ -27,6 +27,7 @@
           blink-indent
           gruvbox-material
           tiny-inline-diagnostic-nvim
+          nvim-lspconfig
         ];
 
         luaConfigRC.custom-plugin-setups = ''
