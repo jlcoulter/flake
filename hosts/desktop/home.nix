@@ -10,6 +10,14 @@
     # Additional desktop-specific packages
   ];
 
+  home.pointerCursor = {
+    gtk.enable = true;
+    x11.enable = true;
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Classic";
+    size = 24;
+  };
+
   programs = {
     zsh = {
       enable = true;
@@ -41,5 +49,18 @@
       package = pkgs.capitaine-cursors-themed;
       name = "capitaine-cursors-gruvbox";
     };
+  };
+
+  wayland.windowManager.hyprland = {
+    enable = true;
+    settings = {
+      env = [
+        "HYPRCURSOR_THEME,Bibata-Modern-Classic"
+        "HYPRCURSOR_SIZE,24"
+        "XCURSOR_THEME,Bibata-Modern-Classic"
+        "XCURSOR_SIZE,24"
+      ];
+    };
+    extraConfig = builtins.readFile ../../modules/hypr/hyprland.conf;
   };
 }
