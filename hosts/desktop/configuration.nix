@@ -90,7 +90,7 @@
       hyprpaper
       copyq
       ollama
-      zed
+      zed-editor
     ];
   };
 

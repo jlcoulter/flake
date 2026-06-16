@@ -11,6 +11,21 @@
     # Additional desktop-specific packages
   ];
 
+  services.hyprpaper = {
+    enable = true;
+    settings = {
+      splash = false;
+      preload = [
+        "~/flake/hosts/desktop/background.jpg"
+      ];
+      wallpaper = [
+        {
+          monitor = "";
+          path = "~/flake/hosts/desktop/background.jpg";
+        }
+      ];
+    };
+  };
   programs = {
     zsh = {
       enable = true;

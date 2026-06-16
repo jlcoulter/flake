@@ -64,6 +64,8 @@ in
   # ── Expose palette and cursor theme for other modules (e.g. hyprland) ──
   theme.palette = palette;
   theme.cursor-theme = cursor-theme;
+  theme.wallpaper = "/home/jc/flake/hosts/desktop/background.jpg";
+  theme.monitor = "DP-1";
 
   # ── Kitty terminal colours ──────────────────────────────────────────────
   programs.kitty.settings = {

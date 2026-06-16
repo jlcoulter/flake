@@ -53,9 +53,10 @@ hl.config({
     },
     blur = {
       enabled   = true,
-      size      = 3,
-      passes    = 1,
+      size      = 6,
+      passes    = 3,
       vibrancy  = 0.1696,
+      popups    = true,
     },
   },
   animations = {
@@ -113,6 +114,9 @@ hl.animation({ leaf = "workspacesOut", enabled = true, speed = 1.94,  bezier = "
 
 -- ── Window rules ────────────────────────────────────────────────────
 hl.window_rule({ match = { class = "spotify" } }, { workspace = 10 })
+
+-- Kitty transparency so Hyprland blur is visible
+hl.window_rule({ match = { class = "kitty" } }, { opacity = 0.85 })
 
 -- ── Keybindings ─────────────────────────────────────────────────────
 hl.bind(mainMod .. " + SHIFT + RETURN", hl.dsp.exec_cmd("kitty"))

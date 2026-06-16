@@ -1,4 +1,9 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 
 let
   palette = config.theme.palette;
@@ -8,26 +13,31 @@ let
   stripHash = s: builtins.substring 1 (builtins.stringLength s - 1) s;
 
   # Read the Lua config and substitute theme placeholders
-  luaConfig = builtins.replaceStrings
-    [
-      "@mainMod@"
-      "@cursor_theme@"
-      "@cursor_size@"
-      "@border_active@"
-      "@border_blue@"
-      "@border_inactive@"
-      "@bg0@"
-    ]
-    [
-      "SUPER"
-      cursor-theme.name
-      (toString cursor-theme.size)
-      "rgba(${stripHash palette.border_active}ee)"
-      "rgba(${stripHash palette.blue}ee)"
-      "rgba(${stripHash palette.border_inactive}aa)"
-      (stripHash palette.bg0)
-    ]
-    (builtins.readFile ./hyprland.lua);
+  luaConfig =
+    builtins.replaceStrings
+      [
+        "@mainMod@"
+        "@cursor_theme@"
+        "@cursor_size@"
+        "@border_active@"
+        "@border_blue@"
+        "@border_inactive@"
+        "@bg0@"
+        "@wallpaper@"
+        "@monitor@"
+      ]
+      [
+        "SUPER"
+        cursor-theme.name
+        (toString cursor-theme.size)
+        "rgba(${stripHash palette.border_active}ee)"
+        "rgba(${stripHash palette.blue}ee)"
+        "rgba(${stripHash palette.border_inactive}aa)"
+        (stripHash palette.bg0)
+        config.theme.wallpaper
+        config.theme.monitor
+      ]
+      (builtins.readFile ./hyprland.lua);
 
 in
 {
@@ -42,9 +52,33 @@ in
       default = { };
       description = "Cursor theme attrset with package, name, size.";
     };
+    wallpaper = mkOption {
+      type = types.str;
+      default = "";
+      description = "Absolute path to the wallpaper image for hyprpaper.";
+    };
+    monitor = mkOption {
+      type = types.str;
+      default = "";
+      description = "Monitor name for hyprpaper (e.g. \"DP-1\").";
+    };
   };
 
   config = {
+    services.hyprpaper = {
+      enable = true;
+      settings = {
+        preload = [
+          "~/flake/hosts/desktop/background.jpg"
+        ];
+        wallpaper = [
+          {
+            monitor = "";
+            path = "~/flake/hosts/desktop/background.jpg";
+          }
+        ];
+      };
+    };
     wayland.windowManager.hyprland = {
       enable = true;
       configType = "lua";
@@ -61,13 +95,5 @@ in
       force = true;
     };
 
-    # Hyprpaper wallpaper config
-    xdg.configFile."hypr/hyprpaper.conf" = {
-      text = ''
-        preload = /home/jc/flake/hosts/desktop/background.jpg
-        wallpaper = ,/home/jc/flake/hosts/desktop/background.jpg
-      '';
-      force = true;
-    };
   };
 }
