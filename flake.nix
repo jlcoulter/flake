@@ -52,7 +52,7 @@
         system = "aarch64-linux";
         specialArgs = { inherit self inputs; };
         modules = [
-          #./hosts/server/default.nix
+          ./hosts/server/default.nix
           inputs.home-manager.nixosModules.default
           nvf.nixosModules.default
         ];
@@ -63,12 +63,12 @@
 
         specialArgs = { inherit self inputs; };
         modules = [
-          #./hosts/macbook
+          ./hosts/macbook
           inputs.home-manager.darwinModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            #home-manager.users.jlcoulter = import ./hosts/macbook/home.nix;
+            home-manager.users.jlcoulter = import ./hosts/macbook/home.nix;
           }
           nvf.darwinModules.default
         ];
