@@ -4,6 +4,7 @@
   imports = [
     ../../modules/shared/home.nix
     ./theme.nix
+    ../../modules/hypr/hyprland.nix
   ];
 
   home.packages = with pkgs; [

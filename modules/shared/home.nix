@@ -75,6 +75,7 @@
     neovim
     fira-code
     fira-code-symbols
+    nerd-fonts.symbols-only
     fastfetch
     yazi
   ];

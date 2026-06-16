@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, config, ... }:
 
 let
   # ═══════════════════════════════════════════════════════════════════════
@@ -35,7 +35,7 @@ let
     cursor     = palette.fg;
     selection  = palette.bg5;
 
-    # Derived for Hyprland borders (rgba format: rrggbb)
+    # Derived for Hyprland borders (strip '#' for Lua rgba/hex formats)
     border_active   = palette.green;
     border_inactive = palette.bg4;
   };
@@ -61,6 +61,10 @@ let
 
 in
 {
+  # ── Expose palette and cursor theme for other modules (e.g. hyprland) ──
+  theme.palette = palette;
+  theme.cursor-theme = cursor-theme;
+
   # ── Kitty terminal colours ──────────────────────────────────────────────
   programs.kitty.settings = {
     background            = palette.bg0;
@@ -106,20 +110,7 @@ in
     theme = gtk-theme;
     iconTheme = icon-theme;
     cursorTheme = cursor-theme;
+    gtk4.theme = null;
     gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
-  };
-
-  # ── Hyprland ─────────────────────────────────────────────────────────────
-  wayland.windowManager.hyprland = {
-    enable = true;
-    settings = {
-      env = [
-        "HYPRCURSOR_THEME,${cursor-theme.name}"
-        "HYPRCURSOR_SIZE,${toString cursor-theme.size}"
-        "XCURSOR_THEME,${cursor-theme.name}"
-        "XCURSOR_SIZE,${toString cursor-theme.size}"
-      ];
-    };
-    extraConfig = builtins.readFile ../../modules/hypr/hyprland.conf;
   };
 }
