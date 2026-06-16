@@ -86,7 +86,7 @@ in
     # Bright colours (colour8–colour15)
     color8  = palette.bg3;
     color9  = palette.red;
-    color10 = palette.green;
+    color10 = palette.green;    # bright green keeps the real everforest green for terminal content
     color11 = palette.yellow;
     color12 = palette.blue;
     color13 = palette.purple;
@@ -112,5 +112,10 @@ in
     cursorTheme = cursor-theme;
     gtk4.theme = null;
     gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
+  };
+
+  # ── Zellij theme ────────────────────────────────────────────────────────
+  programs.zellij = {
+    settings.theme = "everforest-dark";
   };
 }

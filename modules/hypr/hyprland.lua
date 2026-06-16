@@ -29,7 +29,7 @@ end)
 -- ── Look and feel ────────────────────────────────────────────────────
 hl.config({
   general = {
-    gaps_in  = 5,
+    gaps_in  = 8,
     gaps_out = 20,
     border_size = 2,
     col = {
@@ -113,7 +113,7 @@ hl.animation({ leaf = "workspacesOut", enabled = true, speed = 1.94,  bezier = "
 
 -- ── Keybindings ─────────────────────────────────────────────────────
 hl.bind(mainMod .. " + SHIFT + RETURN", hl.dsp.exec_cmd("kitty"))
-hl.bind(mainMod .. " + Q",             hl.dsp.window.close())
+hl.bind(mainMod .. " + SHIFT + Q",             hl.dsp.window.close())
 hl.bind(mainMod .. " + M",             hl.dsp.exit())
 hl.bind(mainMod .. " + E",             hl.dsp.exec_cmd("kitty -e yazi"))
 hl.bind(mainMod .. " + V",             hl.dsp.window.float({ action = "toggle" }))

@@ -55,6 +55,7 @@
 
   # Hyprland.nix
   programs.hyprland.enable = true;
+  programs.zsh.enable = true;
   services.displayManager.ly.enable = true;
 
   # Steam.nix
@@ -72,6 +73,7 @@
   users.users.jc = {
     isNormalUser = true;
     description = "Jack Coulter";
+    shell = pkgs.zsh;
     extraGroups = [
       "networkmanager"
       "wheel"
@@ -80,7 +82,6 @@
       kitty
       brave
       waybar
-      zsh
       hyprlock
       hyprlauncher
       hyprpolkitagent
