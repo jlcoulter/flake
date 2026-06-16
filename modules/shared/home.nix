@@ -52,7 +52,8 @@
     shellIntegration.enableZshIntegration = true;
     settings = {
       shell = "zsh";
-      background_opacity = "1.0";
+      confirm_os_window_close = 0;
+      background_opacity = "0.85";
       background_blur = 1;
       disable_ligatures = "never";
       bold_font = "Fira Code Bold";
@@ -162,6 +163,8 @@
             bind "Alt j" { MoveFocus "down"; }
             bind "Alt k" { MoveFocus "up"; }
             bind "Alt n" { NewPane; }
+            bind "Alt [" { GoToPreviousTab; }
+            bind "Alt ]" { GoToNextTab; }
             bind "Ctrl q" { Quit; }
         }
         shared_except "locked" "normal" "entersearch" "renametab" "renamepane" {
@@ -170,10 +173,7 @@
         shared_except "locked" "normal" "entersearch" "renametab" "renamepane" {
             bind "esc" { SwitchToMode "normal"; }
         }
-        shared_among "pane" "tab" "resize" "scroll" "session" {
-            bind "Ctrl [" { GoToPreviousTab; }
-            bind "Ctrl ]" { GoToNextTab; }
-        }
+
       }
     '';
   };

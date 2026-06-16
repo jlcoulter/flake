@@ -60,5 +60,14 @@ in
       text = "# Managed by home-manager. Config is in hyprland.lua\n";
       force = true;
     };
+
+    # Hyprpaper wallpaper config
+    xdg.configFile."hypr/hyprpaper.conf" = {
+      text = ''
+        preload = /home/jc/flake/hosts/desktop/background.jpg
+        wallpaper = ,/home/jc/flake/hosts/desktop/background.jpg
+      '';
+      force = true;
+    };
   };
 }

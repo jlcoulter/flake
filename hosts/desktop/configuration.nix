@@ -102,6 +102,13 @@
     };
   };
 
+  # Fonts (must be in fonts.packages for fontconfig / Pango to find them)
+  fonts.packages = with pkgs; [
+    fira-code
+    fira-code-symbols
+    nerd-fonts.symbols-only
+  ];
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 

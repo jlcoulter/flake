@@ -114,6 +114,180 @@ in
     gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
   };
 
+  # ── Waybar ──────────────────────────────────────────────────────────────
+  programs.waybar = {
+    enable = true;
+    settings.mainBar = {
+      layer = "top";
+      position = "top";
+      height = 34;
+      spacing = 4;
+      margin-top = 4;
+      margin-bottom = 0;
+      margin-left = 8;
+      margin-right = 8;
+
+      modules-left = [ "hyprland/workspaces" ];
+      modules-center = [ "hyprland/window" ];
+      modules-right = [
+        "pulseaudio"
+        "network"
+        "cpu"
+        "memory"
+        "temperature"
+        "battery"
+        "clock"
+        "tray"
+      ];
+
+      "hyprland/workspaces" = {
+        format = "{icon}";
+        format-icons = {
+          active = "";
+          urgent = "";
+          default = "";
+        };
+        persistent-workspaces = { "*" = 5; };
+      };
+
+      "hyprland/window" = {
+        format = "{title}";
+        max-length = 50;
+        rewrite = {
+          "(.*) — Mozilla Firefox" = "󰈹 $1";
+          "(.*) - Visual Studio Code" = "󰨞 $1";
+          "(.*) - NVIM" = "nvim $1";
+        };
+      };
+
+      clock = {
+        format = "󰥔 {:%H:%M}";
+        format-alt = "󰃭 {:%a %d %b %Y}";
+        tooltip-format = "<tt>{calendar}</tt>";
+      };
+
+      pulseaudio = {
+        format = "{icon} {volume}%";
+        format-muted = "󰝟 muted";
+        format-icons = { default = "󰕾"; };
+        on-click = "pavucontrol";
+      };
+
+      network = {
+        format-wifi = "󰤨 {essid}";
+        format-ethernet = "󰈀 wired";
+        format-disconnected = "󰤭 offline";
+        tooltip-format-wifi = "Signal: {signalStrength}%";
+      };
+
+      cpu = { format = "󰻠 {usage}%"; };
+      memory = { format = "󰍛 {}%"; };
+      temperature = {
+        format = " {temperatureC}°C";
+        critical-threshold = 80;
+        format-critical = " {temperatureC}°C";
+      };
+
+      battery = {
+        format = "{icon} {capacity}%";
+        format-icons = [ "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
+        format-charging = "󰂄 {capacity}%";
+      };
+
+      tray = { spacing = 8; };
+    };
+
+    style = ''
+      /* ── Everforest Dark palette (sourced from theme.nix) ──────────── */
+      @define-color bg0        ${palette.bg0};
+      @define-color bg1        ${palette.bg1};
+      @define-color bg2        ${palette.bg2};
+      @define-color bg3        ${palette.bg3};
+      @define-color bg4        ${palette.bg4};
+      @define-color bg5        ${palette.bg5};
+      @define-color fg         ${palette.fg};
+      @define-color fg1        ${palette.fg1};
+      @define-color red        ${palette.red};
+      @define-color orange     ${palette.orange};
+      @define-color yellow     ${palette.yellow};
+      @define-color green      ${palette.green};
+      @define-color cyan       ${palette.cyan};
+      @define-color blue       ${palette.blue};
+      @define-color purple     ${palette.purple};
+      @define-color aqua       ${palette.aqua};
+
+      /* ── Global ────────────────────────────────────────────────────── */
+      * {
+        border: none;
+        border-radius: 0;
+        font-family: "Fira Code", "Symbols Nerd Font Mono", "Noto Sans CJK SC";
+        font-size: 13px;
+        min-height: 0;
+      }
+
+      window#waybar {
+        background: @bg0;
+        color: @fg;
+      }
+
+      /* ── Workspaces ───────────────────────────────────────────────── */
+      #workspaces button {
+        padding: 0 8px;
+        color: @fg1;
+        background: transparent;
+      }
+      #workspaces button.active {
+        color: @green;
+      }
+      #workspaces button.urgent {
+        color: @red;
+      }
+      #workspaces button:hover {
+        color: @fg;
+        background: @bg2;
+      }
+
+      /* ── Modules ──────────────────────────────────────────────────── */
+      #window {
+        color: @fg;
+        padding: 0 12px;
+      }
+
+      #clock,
+      #pulseaudio,
+      #network,
+      #cpu,
+      #memory,
+      #temperature,
+      #battery,
+      #tray {
+        padding: 0 10px;
+        margin: 0 2px;
+        color: @fg;
+        background: @bg1;
+        border-radius: 4px;
+      }
+
+      #clock { color: @yellow; }
+      #pulseaudio { color: @blue; }
+      #network { color: @cyan; }
+      #cpu { color: @green; }
+      #memory { color: @purple; }
+      #temperature { color: @orange; }
+      #temperature.critical { color: @red; }
+      #battery { color: @green; }
+      #battery.warning:not(.charging) { color: @orange; }
+      #battery.critical:not(.charging) { color: @red; }
+      #tray { color: @fg1; }
+
+      tooltip {
+        background: @bg1;
+        color: @fg;
+        border: 1px solid @bg3;
+      }
+    '';
+  };
+
   # ── Zellij theme ────────────────────────────────────────────────────────
   programs.zellij = {
     settings.theme = "everforest-dark";

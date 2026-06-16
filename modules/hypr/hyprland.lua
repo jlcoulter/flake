@@ -111,6 +111,9 @@ hl.animation({ leaf = "workspaces",    enabled = true, speed = 1.94,  bezier = "
 hl.animation({ leaf = "workspacesIn",  enabled = true, speed = 1.21,  bezier = "almostLinear", style = "fade" })
 hl.animation({ leaf = "workspacesOut", enabled = true, speed = 1.94,  bezier = "almostLinear", style = "fade" })
 
+-- ── Window rules ────────────────────────────────────────────────────
+hl.window_rule({ match = { class = "spotify" } }, { workspace = 10 })
+
 -- ── Keybindings ─────────────────────────────────────────────────────
 hl.bind(mainMod .. " + SHIFT + RETURN", hl.dsp.exec_cmd("kitty"))
 hl.bind(mainMod .. " + SHIFT + Q",             hl.dsp.window.close())
