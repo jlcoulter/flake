@@ -88,6 +88,8 @@
       hyprsunset
       hyprpaper
       copyq
+      ollama
+      zed
     ];
   };
 

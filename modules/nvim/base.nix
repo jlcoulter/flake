@@ -19,13 +19,13 @@
           enable = true;
           autotagHtml = true;
           context.enable = true;
-          fold = true;
+          fold = false;
           textobjects.enable = true;
         };
         clipboard.enable = true;
         startPlugins = with pkgs.vimPlugins; [
           blink-indent
-          gruvbox-material
+          everforest
           tiny-inline-diagnostic-nvim
           nvim-lspconfig
         ];
@@ -49,7 +49,7 @@
           expandtab = false;
         };
         statusline.lualine.enable = true;
-        statusline.lualine.theme = "gruvbox-material";
+        statusline.lualine.theme = "everforest";
         telescope.enable = true;
         globals.mapleader = ",";
         globals.maplocalleader = "\\";
@@ -68,6 +68,8 @@
 
         theme = {
           enable = true;
+          name = "everforest";
+          style = "medium";
           transparent = true;
         };
 
