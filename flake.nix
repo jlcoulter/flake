@@ -28,26 +28,29 @@
       ...
     }@inputs:
     {
+      # ── Desktop (jcpc) ──────────────────────────────────────────────────
       nixosConfigurations.default = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit self inputs; };
         modules = [
-          ./hosts/desktop/configuration.nix
+          ./hosts/desktop/default.nix
           inputs.home-manager.nixosModules.default
           nvf.nixosModules.default
         ];
       };
 
+      # ── Server (AMD64) ─────────────────────────────────────────────────
       nixosConfigurations.server-amd = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit self inputs; };
         modules = [
-          #./hosts/server/default.nix
+          ./hosts/server-amd/default.nix
           inputs.home-manager.nixosModules.default
           nvf.nixosModules.default
         ];
       };
 
+      # ── Server (ARM) ───────────────────────────────────────────────────
       nixosConfigurations.server-arm = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
         specialArgs = { inherit self inputs; };
@@ -58,9 +61,9 @@
         ];
       };
 
+      # ── MacBook (macOS) ────────────────────────────────────────────────
       darwinConfigurations."macbook" = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
-
         specialArgs = { inherit self inputs; };
         modules = [
           ./hosts/macbook
@@ -68,6 +71,9 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            home-manager.sharedModules = [
+              ./modules/theme/everforest.nix
+            ];
             home-manager.users.jlcoulter = import ./hosts/macbook/home.nix;
           }
           nvf.darwinModules.default

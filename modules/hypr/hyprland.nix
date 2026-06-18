@@ -1,3 +1,8 @@
+# Hyprland home-manager module.
+#
+# Reads theme options from config.theme (provided by modules/theme/everforest.nix
+# at the NixOS level and consumed here as a home-manager option).
+# The hyprpaper service is handled by modules/theme/home-theme.nix.
 {
   pkgs,
   lib,
@@ -30,9 +35,9 @@ let
         "SUPER"
         cursor-theme.name
         (toString cursor-theme.size)
-        "rgba(${stripHash palette.border_active}ee)"
+        "rgba(${stripHash palette.green}ee)"
         "rgba(${stripHash palette.blue}ee)"
-        "rgba(${stripHash palette.border_inactive}aa)"
+        "rgba(${stripHash palette.bg4}aa)"
         (stripHash palette.bg0)
         config.theme.wallpaper
         config.theme.monitor
@@ -41,44 +46,7 @@ let
 
 in
 {
-  options.theme = with lib; {
-    palette = mkOption {
-      type = types.attrs;
-      default = { };
-      description = "Colour palette to use across the system.";
-    };
-    cursor-theme = mkOption {
-      type = types.attrs;
-      default = { };
-      description = "Cursor theme attrset with package, name, size.";
-    };
-    wallpaper = mkOption {
-      type = types.str;
-      default = "";
-      description = "Absolute path to the wallpaper image for hyprpaper.";
-    };
-    monitor = mkOption {
-      type = types.str;
-      default = "";
-      description = "Monitor name for hyprpaper (e.g. \"DP-1\").";
-    };
-  };
-
   config = {
-    services.hyprpaper = {
-      enable = true;
-      settings = {
-        preload = [
-          "~/flake/hosts/desktop/background.jpg"
-        ];
-        wallpaper = [
-          {
-            monitor = "";
-            path = "~/flake/hosts/desktop/background.jpg";
-          }
-        ];
-      };
-    };
     wayland.windowManager.hyprland = {
       enable = true;
       configType = "lua";
@@ -94,6 +62,5 @@ in
       text = "# Managed by home-manager. Config is in hyprland.lua\n";
       force = true;
     };
-
   };
 }
