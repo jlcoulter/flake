@@ -3,7 +3,14 @@
 # Imports shared system base, desktop-specific modules (Hyprland, gaming),
 # hardware config, NFS mounts, printer, and Zen browser.
 # Home-manager is wired in here with theme and Hyprland modules.
-{ config, pkgs, lib, inputs, self, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  self,
+  ...
+}:
 
 {
   imports = [
@@ -16,6 +23,7 @@
     ../../modules/nvim/base.nix
     ../../modules/nvim/languages/go.nix
     ../../modules/nvim/languages/nix.nix
+    ../../modules/nvim/languages/rust.nix
 
     # ── Desktop modules ──
     ../../modules/desktop/hyprland.nix
@@ -37,7 +45,10 @@
     isNormalUser = true;
     description = "Jack Coulter";
     shell = pkgs.zsh;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     packages = with pkgs; [
       brave
       ollama
@@ -61,9 +72,16 @@
   # ── Firewall (desktop-specific ports) ──────────────────────────────────
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 25565 5678 21 ];
+    allowedTCPPorts = [
+      25565
+      5678
+      21
+    ];
     allowedTCPPortRanges = [
-      { from = 51000; to = 51999; }  # FTP passive
+      {
+        from = 51000;
+        to = 51999;
+      } # FTP passive
     ];
   };
 
@@ -99,3 +117,4 @@
 
   system.stateVersion = "25.05";
 }
+

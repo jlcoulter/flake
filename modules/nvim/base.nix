@@ -8,6 +8,7 @@
       fzf
       ripgrep
       fd
+      exercism
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [ xclip ];
 
