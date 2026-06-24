@@ -9,8 +9,8 @@
       ripgrep
       fd
       exercism
-    ]
-    ++ lib.optionals pkgs.stdenv.isLinux [ xclip ];
+      uv
+    ];
 
   programs.nvf = {
     enable = true;
@@ -23,7 +23,10 @@
           fold = false;
           textobjects.enable = true;
         };
-        clipboard.enable = true;
+        clipboard = {
+          enable = true;
+          providers.wl-copy.enable = true;
+        };
         startPlugins = with pkgs.vimPlugins; [
           blink-indent
           everforest

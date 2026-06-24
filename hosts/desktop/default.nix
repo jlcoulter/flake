@@ -35,6 +35,10 @@
     ./nfs.nix
   ];
 
+  # ── TEMP ──────────────────────────────────────────────────────
+  environment.stub-ld.enable = true;
+  programs.nix-ld.enable = true;
+
   # ── Host identity ──────────────────────────────────────────────────────
   networking.hostName = "jcpc";
   boot.loader.systemd-boot.enable = true;
@@ -48,12 +52,15 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "audio"
     ];
     packages = with pkgs; [
       brave
       ollama
       zed-editor
       mcp-nixos
+      pavucontrol
+      spotify
     ];
   };
 
@@ -117,4 +124,3 @@
 
   system.stateVersion = "25.05";
 }
-

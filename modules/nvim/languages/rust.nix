@@ -5,6 +5,7 @@
     rust-analyzer
     rustfmt
     rustc
+    dbeaver-bin
   ];
 
   programs.nvf.settings.vim.languages.rust = {

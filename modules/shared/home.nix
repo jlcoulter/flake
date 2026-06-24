@@ -7,26 +7,22 @@
 {
   home = {
     username = lib.mkDefault (if pkgs.stdenv.isDarwin then "jlcoulter" else "jc");
-    homeDirectory =
-      if pkgs.stdenv.isDarwin
-      then "/Users/jlcoulter"
-      else "/home/jc";
+    homeDirectory = if pkgs.stdenv.isDarwin then "/Users/jlcoulter" else "/home/jc";
     stateVersion = "24.11";
   };
 
-  home.shellAliases =
-    {
-      vim = "nvim";
-      vi = "nvim";
-      flake = "cd ~/flake && nvim ~/flake/flake.nix";
-      clobber = "git add . && git commit -m \"$(date)\" && git push";
-    }
-    // lib.optionalAttrs (!pkgs.stdenv.isDarwin) {
-      update = "sudo nixos-rebuild switch --flake ~/flake/#default";
-    }
-    // lib.optionalAttrs pkgs.stdenv.isDarwin {
-      update = "darwin-rebuild switch --flake ~/flake";
-    };
+  home.shellAliases = {
+    vim = "nvim";
+    vi = "nvim";
+    flake = "cd ~/flake && nvim ~/flake/flake.nix";
+    clobber = "git add . && git commit -m \"$(date)\" && git push";
+  }
+  // lib.optionalAttrs (!pkgs.stdenv.isDarwin) {
+    update = "sudo nixos-rebuild switch --flake ~/flake/#default";
+  }
+  // lib.optionalAttrs pkgs.stdenv.isDarwin {
+    update = "darwin-rebuild switch --flake ~/flake";
+  };
 
   programs = {
     git = {
@@ -48,6 +44,22 @@
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
       autocd = true;
+      initContent = ''
+        export PATH="$HOME/.local/bin:$PATH"
+
+        function check_kbauto_env() {
+          if [[ "$PWD" == "/home/jc/git/kbauto"* ]]; then
+            export OPENSSL_DIR="${pkgs.openssl.dev}"
+            export OPENSSL_LIB_DIR="${pkgs.openssl.out}/lib"
+            export PKG_CONFIG_PATH="${pkgs.openssl.dev}/lib/pkgconfig"
+          else
+            unset OPENSSL_DIR OPENSSL_LIB_DIR PKG_CONFIG_PATH
+          fi
+        }
+
+        chpwd_functions+=(check_kbauto_env)
+        check_kbauto_env
+      '';
       oh-my-zsh = {
         enable = true;
         plugins = [ "git" ];
@@ -73,7 +85,6 @@
         bold_italic_font = "Fira Code Bold Italic";
       };
     };
-
 
     zellij = {
       enable = true;

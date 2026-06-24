@@ -24,6 +24,7 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("hyprpaper")
   hl.exec_cmd("hyprpolkitagent")
   hl.exec_cmd("hyprsunset")
+  hl.exec_cmd("copyq start --server")
 end)
 
 -- ── Look and feel ────────────────────────────────────────────────────
@@ -118,9 +119,15 @@ hl.window_rule({ match = { class = "spotify" } }, { workspace = 10 })
 -- Kitty transparency so Hyprland blur is visible
 hl.window_rule({ match = { class = "kitty" } }, { opacity = 0.85 })
 
+-- CopyQ: float on top, no focus steal on server start
+hl.window_rule({ match = { class = "copyq", title = "CopyQ" } }, { floating = true, pin = true })
+
 -- ── Keybindings ─────────────────────────────────────────────────────
 hl.bind(mainMod .. " + SHIFT + RETURN", hl.dsp.exec_cmd("kitty"))
 hl.bind(mainMod .. " + SHIFT + Q",             hl.dsp.window.close())
+
+-- Clipboard history (CopyQ)
+hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("copyq toggle"))
 hl.bind(mainMod .. " + M",             hl.dsp.exit())
 hl.bind(mainMod .. " + E",             hl.dsp.exec_cmd("kitty -e yazi"))
 hl.bind(mainMod .. " + V",             hl.dsp.window.float({ action = "toggle" }))
