@@ -91,6 +91,7 @@
       copyq
       ollama
       zed-editor
+      gh
     ];
   };
 

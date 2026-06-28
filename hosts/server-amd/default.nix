@@ -1,7 +1,8 @@
-# Server (ARM) — NixOS configuration.
+# Server (AMD64) — NixOS configuration.
 #
-# Headless server with Docker, SSH, Tailscale.
-# Uses shared system base and its own minimal home config.
+# This is a template for an x86_64 server. Run `nixos-generate-config`
+# on the target machine to generate a proper hardware-configuration.nix,
+# then replace the stub below with it.
 { config, pkgs, lib, inputs, self, ... }:
 
 {
@@ -16,12 +17,11 @@
   ];
 
   # ── Host identity ──────────────────────────────────────────────────────
-  networking.hostName = "server";
+  networking.hostName = "server-amd";
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # TODO: Generate hardware-configuration.nix on the target machine with
-  #       nixos-generate-config and add it to imports above.
+  # TODO: Replace with actual hardware-configuration.nix from the target machine
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/CHANGE-ME";
     fsType = "ext4";
@@ -45,16 +45,16 @@
 
   # ── Docker ────────────────────────────────────────────────────────────
   virtualisation.docker = {
-      enable = true;
-      enableOnBoot = true;
-      daemon.settings = {
-        log-driver = "json-file";
-        log-opts = {
-          max-size = "10m";
-          max-file = "3";
-        };
+    enable = true;
+    enableOnBoot = true;
+    daemon.settings = {
+      log-driver = "json-file";
+      log-opts = {
+        max-size = "10m";
+        max-file = "3";
       };
     };
+  };
 
   # ── System packages ───────────────────────────────────────────────────
   environment.systemPackages = with pkgs; [
@@ -71,7 +71,7 @@
     sharedModules = [
       ../../modules/theme/everforest.nix
     ];
-    users.jc = import ./home.nix;
+    users.jc = import ../server/home.nix;
   };
 
   system.stateVersion = "25.05";

@@ -1,20 +1,34 @@
 { pkgs, lib, ... }:
 
+let
+  llm-nvim = pkgs.vimUtils.buildVimPlugin {
+    pname = "llm.nvim";
+    version = "unstable-2025-06-10";
+    src = pkgs.fetchFromGitHub {
+      owner = "huggingface";
+      repo = "llm.nvim";
+      rev = "fdc0758187da61612f9d3365f7a1ac45de47471c";
+      hash = "sha256-vjSa/ae6p/xCFIgRXOwZFsyLu6Gap+/H0DIeIHMnyVs=";
+    };
+    meta.homepage = "https://github.com/huggingface/llm.nvim";
+  };
+in
 {
-  environment.systemPackages =
-    with pkgs;
-    [
-      tree-sitter
-      fzf
-      ripgrep
-      fd
-    ]
-    ++ lib.optionals pkgs.stdenv.isLinux [ xclip ];
+  environment.systemPackages = with pkgs; [
+    tree-sitter
+    fzf
+    ripgrep
+    fd
+    exercism
+    uv
+  ];
 
   programs.nvf = {
     enable = true;
     settings = {
       vim = {
+        extraPackages = with pkgs; [
+        ];
         treesitter = {
           enable = true;
           autotagHtml = true;
@@ -22,7 +36,10 @@
           fold = false;
           textobjects.enable = true;
         };
-        clipboard.enable = true;
+        clipboard = {
+          enable = true;
+          providers.wl-copy.enable = true;
+        };
         startPlugins = with pkgs.vimPlugins; [
           blink-indent
           everforest

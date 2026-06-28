@@ -1,4 +1,6 @@
+# MacBook (macOS / nix-darwin) system configuration.
 { pkgs, inputs, ... }:
+
 {
   imports = [
     ../../modules/nvim/base.nix
