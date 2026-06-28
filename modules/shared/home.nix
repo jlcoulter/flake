@@ -16,6 +16,7 @@
     vi = "nvim";
     flake = "cd ~/flake && nvim ~/flake/flake.nix";
     clobber = "git add . && git commit -m \"$(date)\" && git push";
+    rgitstatus = "find . -type d -name .git -exec sh -c 'echo \"📂 {}\" && git -C $(dirname \"{}\") status -s && echo \"\"' \\;";
   }
   // lib.optionalAttrs (!pkgs.stdenv.isDarwin) {
     update = "sudo nixos-rebuild switch --flake ~/flake/#default";
@@ -35,6 +36,24 @@
           co = "checkout";
           cm = "commit";
         };
+
+        # Merge: always create a merge commit (no fast-forward)
+        merge.ff = false;
+
+        # Pull: only fast-forward — fail if history diverged
+        pull.ff = "only";
+
+        # Default branch name for new repos
+        init.defaultBranch = "master";
+
+        # Auto-track remote branch on push
+        push.autoSetupRemote = true;
+
+        # Prune deleted remote branches on fetch
+        fetch.prune = true;
+
+        # Background optimization + periodic fetches
+        maintenance.auto = true;
       };
     };
 

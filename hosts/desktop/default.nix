@@ -38,6 +38,9 @@
   # ── TEMP ──────────────────────────────────────────────────────
   environment.stub-ld.enable = true;
   programs.nix-ld.enable = true;
+  virtualisation.docker = {
+    enable = true;
+  };
 
   # ── Host identity ──────────────────────────────────────────────────────
   networking.hostName = "jcpc";
@@ -53,6 +56,7 @@
       "networkmanager"
       "wheel"
       "audio"
+      "docker"
     ];
     packages = with pkgs; [
       brave
@@ -61,6 +65,9 @@
       mcp-nixos
       pavucontrol
       spotify
+      gh
+      gnumake
+      docker
     ];
   };
 

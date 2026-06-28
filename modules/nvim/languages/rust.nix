@@ -1,10 +1,8 @@
 { pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    cargo
     rust-analyzer
-    rustfmt
-    rustc
+    rustup
     dbeaver-bin
   ];
 
