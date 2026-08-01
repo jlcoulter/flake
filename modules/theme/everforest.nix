@@ -9,9 +9,14 @@
 #
 # The palette is a plain attrset (no self-references) to avoid infinite
 # recursion. Semantic aliases (bg, fg_dim, etc.) are derived with `let ... in`.
+#
+# Linux-only packages (GTK theme, icon theme, cursor theme) are guarded
+# by pkgs.stdenv.isLinux so this module works on darwin too.
 { pkgs, lib, ... }:
 
 let
+  isLinux = pkgs.stdenv.isLinux;
+
   # ── Everforest Dark (medium contrast) ──────────────────────────────────
   everforest = {
     # Core backgrounds
@@ -47,31 +52,40 @@ in
     };
 
     gtk-theme = mkOption {
-      type = types.attrs;
-      default = {
+      type = types.nullOr types.attrs;
+      default = if isLinux then {
         package = pkgs.everforest-gtk-theme;
         name    = "everforest";
-      };
-      description = "GTK theme attrset: { package, name }.";
+      } else null;
+      defaultText = lib.literalExpression ''
+        { package = pkgs.everforest-gtk-theme; name = "everforest"; }
+      '';
+      description = "GTK theme attrset: { package, name }. null on non-Linux.";
     };
 
     icon-theme = mkOption {
-      type = types.attrs;
-      default = {
+      type = types.nullOr types.attrs;
+      default = if isLinux then {
         package = pkgs.papirus-icon-theme;
         name    = "Papirus-Dark";
-      };
-      description = "Icon theme attrset: { package, name }.";
+      } else null;
+      defaultText = lib.literalExpression ''
+        { package = pkgs.papirus-icon-theme; name = "Papirus-Dark"; }
+      '';
+      description = "Icon theme attrset: { package, name }. null on non-Linux.";
     };
 
     cursor-theme = mkOption {
-      type = types.attrs;
-      default = {
+      type = types.nullOr types.attrs;
+      default = if isLinux then {
         package = pkgs.everforest-cursors;
         name    = "everforest-cursors";
         size    = 24;
-      };
-      description = "Cursor theme attrset: { package, name, size }.";
+      } else null;
+      defaultText = lib.literalExpression ''
+        { package = pkgs.everforest-cursors; name = "everforest-cursors"; size = 24; }
+      '';
+      description = "Cursor theme attrset: { package, name, size }. null on non-Linux.";
     };
 
     wallpaper = mkOption {

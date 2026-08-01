@@ -4,6 +4,9 @@
 # It reads from config.theme.palette / config.theme.cursor-theme etc. which are
 # defined by modules/theme/everforest.nix (imported at the NixOS or darwin level).
 #
+# Linux-only features (Waybar, hyprpaper, GTK, X11 cursor) are guarded by
+# pkgs.stdenv.isLinux so this module works on darwin too.
+#
 # Usage in a home.nix:
 #   imports = [ ../../modules/theme/home-theme.nix ];
 #
@@ -11,6 +14,7 @@
 { config, pkgs, lib, ... }:
 
 let
+  isLinux = pkgs.stdenv.isLinux;
   p = config.theme.palette;
   ct = config.theme.cursor-theme;
 in
@@ -44,8 +48,8 @@ in
     color15 = p.fg;
   };
 
-  # ── Cursor ──────────────────────────────────────────────────────────────
-  home.pointerCursor = {
+  # ── Cursor (X11 / Linux only) ──────────────────────────────────────────
+  home.pointerCursor = lib.mkIf isLinux {
     gtk.enable  = true;
     x11.enable  = true;
     package     = ct.package;
@@ -53,8 +57,8 @@ in
     size        = ct.size;
   };
 
-  # ── GTK theme ───────────────────────────────────────────────────────────
-  gtk = {
+  # ── GTK theme (Linux only) ─────────────────────────────────────────────
+  gtk = lib.mkIf isLinux {
     enable      = true;
     colorScheme = "dark";
     theme       = config.theme.gtk-theme;
@@ -68,7 +72,7 @@ in
   programs.zellij.settings.theme = "everforest-dark";
 
   # ── Waybar (Linux only — guarded by isLinux) ────────────────────────────
-  programs.waybar = lib.mkIf pkgs.stdenv.isLinux {
+  programs.waybar = lib.mkIf isLinux {
     enable = true;
     settings.mainBar = {
       layer = "top";
@@ -242,7 +246,7 @@ in
   };
 
   # ── Hyprpaper (Linux only) ─────────────────────────────────────────────
-  services.hyprpaper = lib.mkIf pkgs.stdenv.isLinux {
+  services.hyprpaper = lib.mkIf isLinux {
     enable = config.theme.wallpaper != "";
     settings = lib.mkIf (config.theme.wallpaper != "") {
       splash = false;
