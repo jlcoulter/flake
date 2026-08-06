@@ -38,7 +38,7 @@ in
         };
         clipboard = {
           enable = true;
-          providers.wl-copy.enable = true;
+          providers.wl-copy.enable = pkgs.stdenv.isLinux;
         };
         startPlugins = with pkgs.vimPlugins; [
           blink-indent

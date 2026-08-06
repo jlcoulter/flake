@@ -71,6 +71,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "bak";
             home-manager.sharedModules = [
               ./modules/theme/everforest.nix
             ];

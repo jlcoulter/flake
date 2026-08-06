@@ -33,18 +33,11 @@
 
   homebrew = {
     enable = true;
-    onActivation.cleanup = "zap";
     brews = [
-      "tock"
     ];
     casks = [
       "kitty"
-      "slack"
-      "unifi-identity-endpoint"
       "drawio"
-      "canva"
-      "microsoft-teams"
-      "visual-studio-code"
     ];
   };
 

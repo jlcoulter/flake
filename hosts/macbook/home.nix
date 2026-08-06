@@ -16,7 +16,18 @@
 
   home.packages = with pkgs; [
     # macOS-specific packages go here
+    rustup
   ];
+
+  home.sessionVariables = {
+    # macOS: Xcode SDK libraries aren't on the default library path,
+    # so Rust needs LIBRARY_PATH to find libc and other system libs.
+    # The $(xcrun ...) is evaluated at shell startup time.
+    LIBRARY_PATH = "/usr/lib:$(xcrun --show-sdk-path)/usr/lib";
+
+    # rustup installs cargo/rustc to ~/.cargo/bin
+    PATH = "$HOME/.cargo/bin:$PATH";
+  };
 
   programs.zsh.shellAliases = {
     config = "vim ~/flake/hosts/macbook/default.nix";
