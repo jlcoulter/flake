@@ -36,7 +36,6 @@
     brews = [
     ];
     casks = [
-      "kitty"
       "drawio"
     ];
   };
