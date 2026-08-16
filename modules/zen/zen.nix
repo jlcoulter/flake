@@ -44,6 +44,14 @@ in
         extraPolicies = {
           DisableTelemetry = true;
           ExtensionSettings = builtins.listToAttrs extensions;
+          Certificates = {
+            # Automatically trust the operating system's root certificate store
+            ImportEnterpriseRoots = true;
+
+            Install = [
+              "/home/jc/certs/caddy-root-ca.pem"
+            ];
+          };
 
           SearchEngines = {
             Default = "ddg";

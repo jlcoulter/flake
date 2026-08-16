@@ -53,6 +53,7 @@ in
 
         utility = {
           oil-nvim.enable = true;
+          crazy-coverage.enable = true;
         };
 
         ui = {

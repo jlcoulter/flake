@@ -23,6 +23,7 @@
     ../../modules/nvim/base.nix
     ../../modules/nvim/languages/go.nix
     ../../modules/nvim/languages/nix.nix
+    ../../modules/nvim/languages/python.nix
     ../../modules/nvim/languages/rust.nix
 
     # ── Desktop modules ──
@@ -59,6 +60,8 @@
       "docker"
     ];
     packages = with pkgs; [
+      lsof
+      unzip
       brave
       ollama
       zed-editor
@@ -68,8 +71,25 @@
       gh
       gnumake
       docker
+      ansible
+      dig
+      gitui
+      bind
+      direnv
     ];
   };
+
+  security.sudo.extraRules = [
+    {
+      users = [ "jc" ];
+      commands = [
+        {
+          command = "ALL";
+          options = [ "NOPASSWD" ];
+        }
+      ];
+    }
+  ];
 
   # ── Fonts ───────────────────────────────────────────────────────────────
   fonts.packages = with pkgs; [

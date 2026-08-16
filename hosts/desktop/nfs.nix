@@ -11,7 +11,7 @@
         };
       };
 
-      server = "10.1.1.150";
+      server = "10.1.10.15";
       jellyfin = "/volume1/jellyfin";
       nas = "/volume1/nas";
 

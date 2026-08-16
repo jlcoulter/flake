@@ -49,6 +49,7 @@
 
   # ── Allow unfree ─────────────────────────────────────────────────────────
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.android_sdk.accept_license = true;
 
   # ── Auto-upgrade (can be overridden per-host) ────────────────────────────
   system.autoUpgrade = {

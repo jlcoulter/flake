@@ -11,6 +11,7 @@
     ../../modules/nvim/base.nix
     ../../modules/nvim/languages/go.nix
     ../../modules/nvim/languages/nix.nix
+    ../../modules/nvim/languages/python.nix
     ../../modules/printer/printer.nix
     ../../modules/zen/zen.nix
   ];
@@ -25,6 +26,10 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "jcpc";
+
+  networking.hosts = {
+    "10.1.20.1" = [ "unifi.ui.com" ];
+  };
 
   # Enable networking
   networking.networkmanager.enable = true;
