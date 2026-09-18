@@ -24,6 +24,8 @@
     ../../modules/nvim/languages/go.nix
     ../../modules/nvim/languages/nix.nix
     ../../modules/nvim/languages/rust.nix
+    ../../modules/nvim/languages/python.nix
+    ../../modules/nvim/languages/java.nix
 
     # ── Desktop modules ──
     ../../modules/desktop/hyprland.nix
@@ -31,8 +33,6 @@
     ../../modules/printer/printer.nix
     ../../modules/zen/zen.nix
 
-    # ── NFS mounts ──
-    ./nfs.nix
   ];
 
   # ── TEMP ──────────────────────────────────────────────────────
@@ -41,6 +41,7 @@
   virtualisation.docker = {
     enable = true;
   };
+  services.gnome.gnome-keyring.enable = true;
 
   # ── Host identity ──────────────────────────────────────────────────────
   networking.hostName = "jcpc";
@@ -59,7 +60,12 @@
       "docker"
     ];
     packages = with pkgs; [
+      exercism
+      rustlings
+      unzip
+      sqlite
       brave
+      lsof
       ollama
       zed-editor
       mcp-nixos
@@ -68,6 +74,9 @@
       gh
       gnumake
       docker
+      thunar
+      opencode
+      leetcode-cli
     ];
   };
 

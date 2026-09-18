@@ -64,20 +64,23 @@
       syntaxHighlighting.enable = true;
       autocd = true;
       initContent = ''
-        export PATH="$HOME/.local/bin:$PATH"
+                        export PATH="$HOME/.local/bin:$PATH"
 
-        function check_kbauto_env() {
-          if [[ "$PWD" == "/home/jc/git/kbauto"* ]]; then
-            export OPENSSL_DIR="${pkgs.openssl.dev}"
-            export OPENSSL_LIB_DIR="${pkgs.openssl.out}/lib"
-            export PKG_CONFIG_PATH="${pkgs.openssl.dev}/lib/pkgconfig"
-          else
-            unset OPENSSL_DIR OPENSSL_LIB_DIR PKG_CONFIG_PATH
-          fi
-        }
+        								export GOPATH=$HOME/go
+                				export PATH=$PATH:$GOPATH/bin
 
-        chpwd_functions+=(check_kbauto_env)
-        check_kbauto_env
+                        function check_kbauto_env() {
+                          if [[ "$PWD" == "/home/jc/git/kbauto"* ]]; then
+                            export OPENSSL_DIR="${pkgs.openssl.dev}"
+                            export OPENSSL_LIB_DIR="${pkgs.openssl.out}/lib"
+                            export PKG_CONFIG_PATH="${pkgs.openssl.dev}/lib/pkgconfig"
+                          else
+                            unset OPENSSL_DIR OPENSSL_LIB_DIR PKG_CONFIG_PATH
+                          fi
+                        }
+
+                        chpwd_functions+=(check_kbauto_env)
+                        check_kbauto_env
       '';
       oh-my-zsh = {
         enable = true;

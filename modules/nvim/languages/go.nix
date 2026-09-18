@@ -3,7 +3,7 @@
   environment.systemPackages = with pkgs; [
     gopls
     wrk
-    go
+    go_1_27
     gcc
     delve
     golines

@@ -43,7 +43,7 @@
   services.openssh.enable = true;
   services.tailscale.enable = true;
 
-  # ── Docker ────────────────────────────────────────────────────────────
+  # ── Docker ────────────────────────────────────────────────────────────defaul
   virtualisation.docker = {
       enable = true;
       enableOnBoot = true;

@@ -21,6 +21,7 @@ in
     fd
     exercism
     uv
+    gitui
   ];
 
   programs.nvf = {
@@ -33,7 +34,7 @@ in
           enable = true;
           autotagHtml = true;
           context.enable = true;
-          fold = false;
+          fold = true;
           textobjects.enable = true;
         };
         clipboard = {
@@ -46,6 +47,12 @@ in
           tiny-inline-diagnostic-nvim
           nvim-lspconfig
         ];
+
+        options = {
+          foldmethod = "indent";
+          foldlevel = 99;
+          foldenable = true;
+        };
 
         luaConfigRC.custom-plugin-setups = ''
           require("tiny-inline-diagnostic").setup({ preset = "modern"})

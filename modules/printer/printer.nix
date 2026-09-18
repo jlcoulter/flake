@@ -5,7 +5,7 @@
 {
   hardware.sane = {
     enable = true;
-    extraBackends = [ pkgs.utsushi ];
+    extraBackends = [ pkgs.epkowa ];
   };
   services = {
     printing = {
@@ -17,7 +17,7 @@
       nssmdns4 = true;
     };
     udev = {
-      packages = [ pkgs.utsushi ];
+      packages = [ pkgs.epkowa ];
     };
   };
 }
